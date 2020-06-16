@@ -1,0 +1,13 @@
+.center {
+  text-align: center;
+}
+
+.head {
+  color: yellow;
+  background-color: lightblue;
+  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+body {
+  background-color: #99ff99;
+}
