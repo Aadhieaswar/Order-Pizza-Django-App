@@ -3,16 +3,14 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    request.session["user"] = "name"
-    request.session.clear()
-    try:
-        var = requet.session["username"]
-    except:
-        var = "session cleared"
+
     context = {
-    'msg': var
+    'msg': ""
     }
     return render(request, "orders/index.html", context)
+
+# use request.session["var"] to set session variables
+# user request.session.clear() to clear the session
 
 def login(request):
     return render(request, "orders/login.html", context)
