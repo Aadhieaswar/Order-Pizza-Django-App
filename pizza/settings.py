@@ -121,4 +121,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Session Enabling
-SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+SESSION_COOKIE_HTTPONLY = True

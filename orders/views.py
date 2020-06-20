@@ -9,11 +9,11 @@ def index(request):
     }
     return render(request, "orders/index.html", context)
 
-# use request.session["var"] to set session variables
-# user request.session.clear() to clear the session
+# use request.session["var"] = value --> to set session variables
+# user request.session.clear() --> to clear the session
 
 def login(request):
-    return render(request, "orders/login.html", context)
+    return render(request, "orders/login.html", {'message': None})
 
 def signup(request):
-    return render(request, "orders/signup.html", context)
+    return render(request, "orders/signup.html")

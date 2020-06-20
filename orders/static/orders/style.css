@@ -16,6 +16,53 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-body {
-  background-color: white;
+.form0 {
+  margin: 20px;
+
+}
+
+.card {
+  margin: 20px;
+  background-color: orange;
+  border: 5px double white;
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+#btn0 {
+  margin-left: 39%;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 1250px){
+  .card {
+    width: 70%;
+    margin-left: 15%;
+  }
+  #btn0 {
+    margin-left: 42%;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .card {
+    width: 80%;
+    margin-left: 10%;
+  }
+  #btn0 {
+    margin-left: 39%;
+  }
+}
+
+
+@media screen and (max-width: 650px){
+  .card {
+    width: 90%;
+    margin-left: 5%;
+  }
+  #btn0{
+    margin-left: 34%
+  }
 }

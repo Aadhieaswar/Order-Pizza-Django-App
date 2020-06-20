@@ -11,4 +11,43 @@ Pinocchio's Pizza
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRcb4cGW4nskYwYcrEvfuLKcY8tiMyT3EQsbii2rjTGxxwylSguf73eaqW9jwGJL94ifFXtBIh6kJwZ/pub?w=1438&h=324" class="img">
 </div>
 
+<div class="card">
+  <div class="card-header center" style="border-bottom: 5px solid white; background-color: black; color: white">
+    <h4>Signup for a Pinoccio's Pizza Account!</h4>
+  </div>
+<form class="form0" action="{% url 'signup' %}" method="post">
+  <div class="row">
+    <div class="col">
+  <input type="text" class="form-control" name="first-name" placeholder="First Name">
+</div>
+<div class="col">
+  <input type="text" class="form-control" name="last-name" placeholder="Last Name">
+</div>
+</div>
+<div class="row" style="margin-top: 10px;">
+  <div class="col">
+  <input type="text" class="form-control" name="city" placeholder="City">
+</div>
+<div class="col">
+  <input type="text" class="form-control" name="State" placeholder="State">
+</div>
+</div>
+<div class="row justify-content-between" style="margin-top: 20px; margin-left: 33%">
+  <div class="col-6">
+  <input type="text" name="Username" class="form-control" placeholder="Username">
+</div>
+</div>
+<div class="row justify-content-between" style="margin-top: 5px; margin-left: 33%;">
+  <div class="col-6">
+  <input type="text" name="Password" class="form-control" placeholder="Password">
+</div>
+</div>
+<small class="form-text center" style="color: white;">SignUp with Pinocchio's Pizza to Order Pizza from us Online</small>
+<small class="form-text center" style="color: white;">Already have an account? <a class="badge badge-success" href="{% url 'login' %}">LogIn</a> </small>
+<div id="btn0" class="row">
+<button type="submit" class="btn btn-primary">Create Account</button>
+</div>
+</form>
+</div>
+
 {% endblock %}
