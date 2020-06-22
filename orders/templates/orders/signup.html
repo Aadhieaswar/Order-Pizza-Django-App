@@ -1,5 +1,8 @@
 {% extends "orders/base.html" %}
 
+{% load static %}
+
+<!-- title -->
 {% block title %}
 
 Pinocchio's Pizza
@@ -12,7 +15,7 @@ Pinocchio's Pizza
 <div class="head" style="max-height: 100px; width: 100%; margin-top: 0px; padding-top: 0px;">
   <div class="row" style="margin-bottom: 20px;">
     <div class="col">
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vTUIFx58u7kcuCGWvrGGyT_8SJIA7ExAATe1kkAp6UcWRr0HsTGEe4ww--jS8yhoE3siScCT0nbrPO_/pub?w=1085&h=1021" style="float: left; max-width: 60px; min-height: 30px; margin-left: 15px; margin-top: 20px; margin-right: 10px;">
+<img src="{% static 'images/logo.png' %}" style="float: left; max-width: 60px; min-height: 30px; margin-left: 15px; margin-top: 20px; margin-right: 10px;" loading="lazy">
 <h1 class="title-lobster">Pinocchio's Pizza</h1>
 </div>
 </div>
@@ -47,11 +50,11 @@ Pinocchio's Pizza
 </div>
 <div class="row justify-content-between" style="margin-top: 5px; margin-left: 33%;">
   <div class="col-6">
-  <input type="text" name="Password" class="form-control" placeholder="Password">
+  <input type="password" name="Password" class="form-control" placeholder="Password">
 </div>
 </div>
 <small class="form-text center" style="color: white;">SignUp with Pinocchio's Pizza to Order Pizza from us Online</small>
-<small class="form-text center" style="color: white;">Already have an account?&nbsp<a class="badge badge-success" href="{% url 'login' %}" style="font-size: 12px;">LogIn</a> </small>
+<small class="form-text center" style="color: white;">Already have an account?&nbsp<a class="badge badge-success" href="{% url 'login_view' %}" style="font-size: 12px;">LogIn</a> </small>
 <div id="btn0" class="row">
 <button type="submit" class="btn btn-primary">Create Account</button>
 </div>
