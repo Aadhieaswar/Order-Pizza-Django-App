@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .center {
   text-align: center;
 }
@@ -10,7 +15,7 @@
 }
 
 .img {
-  text-align: center;
+  float: center;
   max-width: 410px;
   min-height: 110px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -18,7 +23,6 @@
 
 .form0 {
   margin: 20px;
-
 }
 
 .card {
@@ -32,17 +36,39 @@
 }
 
 #btn0 {
-  margin-left: 39%;
+  justify-content: center;
   margin-top: 15px;
 }
 
+.link-white {
+  float: right;
+  font-weight: bold;
+  color: white;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.link-white:hover{
+  color: black;
+  background-color: white;
+  text-decoration: none;
+}
+
+.title-lobster {
+  color: #f6800a;
+  display: table;
+  vertical-align: middle;
+  font-size: 55px;
+  font-family: "Lobster";
+  padding: 15px;
+}
 @media screen and (max-width: 1250px){
   .card {
     width: 70%;
     margin-left: 15%;
-  }
-  #btn0 {
-    margin-left: 42%;
   }
 }
 
@@ -51,9 +77,6 @@
     width: 80%;
     margin-left: 10%;
   }
-  #btn0 {
-    margin-left: 39%;
-  }
 }
 
 
@@ -61,8 +84,5 @@
   .card {
     width: 90%;
     margin-left: 5%;
-  }
-  #btn0{
-    margin-left: 34%
   }
 }

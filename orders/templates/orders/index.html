@@ -7,10 +7,24 @@ Pinocchio's Pizza
 {% endblock %}
 
 {% block body %}
-<div class="center head" style="max-height: 100px;">
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vRcb4cGW4nskYwYcrEvfuLKcY8tiMyT3EQsbii2rjTGxxwylSguf73eaqW9jwGJL94ifFXtBIh6kJwZ/pub?w=1438&h=324" class="img">
+
+<!-- NavBar -->
+<div class="head" style="max-height: 100px; width: 100%; margin-top: 0px; padding-top: 0px;">
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vTUIFx58u7kcuCGWvrGGyT_8SJIA7ExAATe1kkAp6UcWRr0HsTGEe4ww--jS8yhoE3siScCT0nbrPO_/pub?w=1085&h=1021" style="float: left; max-width: 60px; min-height: 30px; margin-left: 15px; margin-top: 20px; margin-right: 10px;" loading="lazy">
+<h1 class="title-lobster">Pinocchio's Pizza</h1>
+</div>
+<div class="col">
+</div>
+<div class="col" style="margin-top: 10px;">
+<a class="link-white" href="{% url 'login' %}">logIn</a>
+<a class="link-white" href="{% url 'signup' %}">SignUp</a>
+</div>
+</div>
 </div>
 
+<!-- Content -->
 <div class="badge badge-info center">{{ msg }}</div>
 
 {% endblock %}

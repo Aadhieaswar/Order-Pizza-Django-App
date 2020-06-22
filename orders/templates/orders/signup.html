@@ -7,10 +7,18 @@ Pinocchio's Pizza
 {% endblock %}
 
 {% block body %}
-<div class="center head" style="max-height: 100px;">
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vRcb4cGW4nskYwYcrEvfuLKcY8tiMyT3EQsbii2rjTGxxwylSguf73eaqW9jwGJL94ifFXtBIh6kJwZ/pub?w=1438&h=324" class="img">
+
+<!-- NavBar -->
+<div class="head" style="max-height: 100px; width: 100%; margin-top: 0px; padding-top: 0px;">
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vTUIFx58u7kcuCGWvrGGyT_8SJIA7ExAATe1kkAp6UcWRr0HsTGEe4ww--jS8yhoE3siScCT0nbrPO_/pub?w=1085&h=1021" style="float: left; max-width: 60px; min-height: 30px; margin-left: 15px; margin-top: 20px; margin-right: 10px;">
+<h1 class="title-lobster">Pinocchio's Pizza</h1>
+</div>
+</div>
 </div>
 
+<!-- Content -->
 <div class="card">
   <div class="card-header center" style="border-bottom: 5px solid white; background-color: black; color: white">
     <h4>Signup for a Pinoccio's Pizza Account!</h4>
@@ -43,7 +51,7 @@ Pinocchio's Pizza
 </div>
 </div>
 <small class="form-text center" style="color: white;">SignUp with Pinocchio's Pizza to Order Pizza from us Online</small>
-<small class="form-text center" style="color: white;">Already have an account? <a class="badge badge-success" href="{% url 'login' %}">LogIn</a> </small>
+<small class="form-text center" style="color: white;">Already have an account?&nbsp<a class="badge badge-success" href="{% url 'login' %}" style="font-size: 12px;">LogIn</a> </small>
 <div id="btn0" class="row">
 <button type="submit" class="btn btn-primary">Create Account</button>
 </div>

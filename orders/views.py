@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -13,7 +14,7 @@ def index(request):
 # user request.session.clear() --> to clear the session
 
 def login(request):
-    return render(request, "orders/login.html", {'message': None})
+    return render(request, "orders/login.html")
 
 def signup(request):
     return render(request, "orders/signup.html")
