@@ -26,26 +26,28 @@ Pinocchio's Pizza
   <div class="card-header center" style="border-bottom: 5px solid white; background-color: black; color: white">
     <h4>LogIn to Pinoccio's Pizza!</h4>
   </div>
-  <form class="form0" action="{% url '_login' %}" method="post">
+  <form class="form0" action="{% url 'login_view' %}" method="post" autocomplete="off">
     {% csrf_token %}
-  <div class="row justify-content-between" style="margin-top: 20px; margin-left: 33%">
-    <div class="col-6">
+  <div class="row field-50">
+    <div class="col">
     <input type="text" name="username" class="form-control" placeholder="Username">
   </div>
   </div>
-  <div class="row justify-content-between" style="margin-top: 5px; margin-left: 33%;">
-    <div class="col-6">
+  <div class="row field-50">
+    <div class="col">
     <input type="password" name="password" class="form-control" placeholder="Password">
   </div>
   </div>
-  {% if msg %}
-  <small class="invalid-feedback center" >{{ msg }}</small>
-  {% endif %}
-  <small class="form-text center" style="color: white;">Login to Pinocchio's Pizza to Order Pizza from us Online</small>
-  <small class="form-text center" style="color: white;">Need an account?&nbsp<a class="badge badge-success" href="{% url 'signup_view' %}" style="font-size: 12px;">SignUp</a> </small>
   <div id="btn0" class="row">
   <button type="submit" class="btn btn-primary">Login</button>
 </div>
+{% if messages %}
+  {% for message in messages %}
+<div class="center invalid-feedback">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+<small class="form-text center" style="color: white;">Login to Pinocchio's Pizza to Order Pizza from us Online</small>
+<small class="form-text center" style="color: white;">Need an account?&nbsp<a class="badge badge-success" href="{% url 'signup_view' %}" style="font-size: 12px;">SignUp</a> </small>
 </form>
 
 {% endblock %}

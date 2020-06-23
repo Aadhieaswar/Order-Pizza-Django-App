@@ -66,6 +66,21 @@
   padding: 15px;
 }
 
+.field-80 {
+  margin-top: 10px;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.field-50 {
+  margin-top: 10px;
+  margin-left: 25%;
+  width: 50%
+}
+.vis {
+  display: none;
+}
+
 @media screen and (max-width: 1250px){
   .card {
     width: 70%;
@@ -85,5 +100,14 @@
   .card {
     width: 90%;
     margin-left: 5%;
+  }
+  .inv {
+    display: none;
+  }
+  .vis {
+    display: block;
+  }
+  .split {
+    text-align: center;
   }
 }

@@ -3,7 +3,7 @@
 {% load static %}
 
 <!-- title -->
-{% block head %}
+{% block title %}
 
 {{ title }}
 
@@ -29,8 +29,8 @@
 </div>
 
 <!-- Content -->
-<h1 class="center" style="width: 100%; background-color: lightblue; margin-top: 17px; border-bottom: 10px; border-top: 10px; border-color: white;">
-{{ message }}
+<h1 class="center" style="width: 100%; background-color: lightblue; margin-top: 10px; border-bottom: 10px double; border-top: 10px double; border-color: white; color: #f1f1f1;">
+<div style="padding: 10px;">{{ note }}</div>
 </h1>
 
 {% endblock %}
