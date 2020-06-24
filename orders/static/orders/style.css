@@ -77,8 +77,26 @@
   margin-left: 25%;
   width: 50%
 }
+
 .vis {
   display: none;
+}
+
+.warn-feed {
+  padding: 5px;
+  font-size: 15px;
+  border-top: 2px solid red;
+  border-bottom: 2px solid red;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.warn-feed:hover {
+  color: darkred;
+}
+
+.errorlist {
+  list-style-type: none;
 }
 
 @media screen and (max-width: 1250px){

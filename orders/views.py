@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import CreateUser
+from .decorators import Unauthenticated_user
 from django.contrib import messages
 
 # Create your views here.
@@ -19,6 +20,7 @@ def index(request):
     }
     return render(request, "orders/index.html", context)
 
+@Unauthenticated_user
 def login_view(request):
 
     if request.method == "POST":
@@ -33,13 +35,14 @@ def login_view(request):
 
             login(request, user)
             return HttpResponseRedirect(reverse("home"))
-
-        elif user is None:
-            messages.warning(request, 'Username and/or Password is incorrect')
-            return render(request, "orders/login.html", context_instance=RequestContext)
+        else:
+            messages.warning(request, 'Invalid Credentials!')
+            print("fking cookies")
+            return render(request, "orders/login.html")
 
     return render(request, "orders/login.html")
 
+@Unauthenticated_user
 def signup_view(request):
 
     form = CreateUser()
