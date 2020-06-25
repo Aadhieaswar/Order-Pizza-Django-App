@@ -12,18 +12,23 @@ Pinocchio's Pizza
 {% block body %}
 
 <!-- NavBar -->
-<div class="head" style="max-height: 100px; width: 100%; margin-top: 0px; padding-top: 0px;">
+<div class="head">
   <div class="row" style="margin-bottom: 20px;">
     <div class="col">
-<img src="{% static 'images/logo.png' %}" style="float: left; max-width: 60px; min-height: 30px; margin-left: 15px; margin-top: 20px; margin-right: 10px;" loading="lazy">
+<img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
 <h1 class="title-lobster">Pinocchio's Pizza</h1>
+</div>
+<div class="col">
+</div>
+<div class="col top-link">
+<a class="link-white" href="{% url 'home' %}">Home</a>
 </div>
 </div>
 </div>
 
 <!-- Content -->
 <div class="card">
-  <div class="card-header center" style="border-bottom: 5px solid white; background-color: black; color: white">
+  <div class="card-header center header-style">
     <h4>Signup for a Pinoccio's Pizza Account!</h4>
   </div>
 <form class="form0" action="{% url 'signup_view' %}" method="post">

@@ -12,10 +12,10 @@
 {% block body %}
 
 <!-- NavBar -->
-<div class="head" style="max-height: 100px; width: 100%; margin-top: 0px; padding-top: 0px;">
+<div class="head">
   <div class="row" style="margin-bottom: 20px;">
     <div class="col">
-<img src="{% static 'images/logo.png' %}" style="float: left; max-width: 60px; min-height: 30px; margin-left: 15px; margin-top: 20px; margin-right: 10px;" loading="lazy">
+<img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
 <h1 class="title-lobster">Pinocchio's Pizza</h1>
 </div>
 <div class="col">
@@ -24,12 +24,13 @@
 
 <a class="link-white" href="{% url 'login_view' %}">logIn</a>
 <a class="link-white" href="{% url 'signup_view' %}">SignUp</a>
+<a class="link-white" href="{% url 'home' %}">Home</a>
 
 </div>
 </div>
 
 <!-- Content -->
-<h1 class="center" style="width: 100%; background-color: lightblue; margin-top: 10px; border-bottom: 10px double; border-top: 10px double; border-color: white; color: #f1f1f1;">
+<h1 class="center notice">
 <div style="padding: 10px;">{{ note }}</div>
 </h1>
 

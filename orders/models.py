@@ -13,10 +13,17 @@ class Pizza(models.Model):
     size = models.CharField(max_length = 2, choices = size_choices)
     cost = models.FloatField(blank = False)
 
-class Toppings(models.Model):
+    def __str__(self):
+        return f"{self.type} {self.pizza} pizza - {self.size} - ${self.cost}"
+
+class Topping(models.Model):
     topping = models.CharField(max_length = 64)
 
-class Subs(models.Model):
+    def __str__(self):
+        return f"{self.topping}"
+
+
+class Sub(models.Model):
     sub = models.CharField(max_length = 64)
     size_choices = [
     ('SM', 'Small'),
@@ -25,15 +32,24 @@ class Subs(models.Model):
     size = models.CharField(max_length = 2, choices = size_choices)
     cost = models.FloatField(blank = False)
 
-class Pastas(models.Model):
+    def __str__(self):
+        return f"{self.sub} sub - {self.size} - ${self.cost}"
+
+class Pasta(models.Model):
     pasta = models.CharField(max_length = 64)
     cost = models.FloatField(blank = False)
 
-class Salads(models.Model):
+    def __str__(self):
+        return f"{self.pasta} - ${self.cost}"
+
+class Salad(models.Model):
     salad = models.CharField(max_length = 64)
     cost = models.FloatField(blank = False)
 
-class DinnerPlatters(models.Model):
+    def __str__(self):
+        return f"{self.salad} - ${self.cost}"
+
+class DinnerPlatter(models.Model):
     platter = models.CharField(max_length = 64)
     size_choices = [
     ('SM', 'Small'),
@@ -42,8 +58,19 @@ class DinnerPlatters(models.Model):
     size = models.CharField(max_length = 2, choices = size_choices)
     cost = models.FloatField(blank = False)
 
-class Cart(models.Model):
-    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    def __str__(self):
+        return f"{self.platter} - {self.size} - ${self.cost}"
 
-class Order(models.Model):
-    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+#class Cart(models.Model):
+#    user = models.ForeignKey(User, on_delete = models.CASCADE)
+#    item_choices = [
+#    ('PIZ', 'Pizza'),
+#    ('SUB', 'Sub'),
+#    ('PAS', 'Pasta'),
+#    ('SAL', 'Salad'),
+#    ('DPL', 'DinnerPlatter')
+#    ]
+#    item = models.CharField(max_length = 3, choices = item_choices)
+
+#class Order(models.Model):
+#    user = models.ForeignKey(User, on_delete = models.CASCADE)

@@ -1,6 +1,35 @@
+
 * {
   margin: 0;
   padding: 0;
+}
+
+body {
+  height: 100%;
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+main {
+  min-height: 100%;
+  overflow: auto;
+  padding-bottom: 100px;
+  width: 100%;
+}
+
+footer {
+  height: 100px;
+  position: relative;
+  margin-top: -129px;
+  clear: both;
+}
+
+.footer-content {
+  color: orange;
+  background-color: black;
+  display: flex;
+  border-top: 5px solid orange;
+  flex-wrap: wrap;
 }
 
 .center {
@@ -12,6 +41,10 @@
   box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 15px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 5px;
   border-bottom: 5px solid white;
+  max-height: 100px;
+  width: 100%;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 .img {
@@ -95,8 +128,43 @@
   color: darkred;
 }
 
+.top-link {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
 .errorlist {
   list-style-type: none;
+}
+
+.logo {
+  float: left;
+  max-width: 60px;
+  min-height: 30px;
+  margin-left: 15px;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.split {
+  width: 100%;
+  padding: 50px;
+}
+
+.notice {
+  width: 100%;
+  background-color: lightblue;
+  margin-top: 10px;
+  border-bottom: 10px double;
+  border-top: 10px double;
+  border-color: white;
+  color: #f1f1f1;
+}
+
+.header-style {
+  border-bottom: 5px solid white;
+  background-color: black;
+  color: white
 }
 
 @media screen and (max-width: 1250px){
