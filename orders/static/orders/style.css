@@ -58,7 +58,7 @@ footer {
   margin: 20px;
 }
 
-.card {
+.card-custom {
   margin: 20px;
   background-color: orange;
   border: 5px double white;
@@ -165,6 +165,57 @@ footer {
   border-bottom: 5px solid white;
   background-color: black;
   color: white
+}
+
+.card-ul {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 40px;
+  border-bottom: 1px solid lightgrey;
+  border-width: 60%;
+}
+
+.card-li {
+  padding: 5px;
+  width: 24%;
+  margin: 5px;
+  color: black;
+  font-size: 20px;
+  font-family: "Lobster";
+  border: 2px solid #f6800a;
+}
+
+.menu-head {
+  color: #f6800a;
+  font-family: "Lobster";
+}
+
+.card-li:hover {
+  color: white;
+  background-color: #f6800a;
+}
+
+.cus-nav {
+  border: 5px double white;
+  width: 90%;
+  justify-content: center;
+  margin-left: 5%;
+  margin-top: 20px;
+}
+
+.white {
+  color: white;
+  font-family: "Lobster";
+  font-size: 25px;
+}
+
+.white:hover {
+  background-color: white;
+  color: #f6800a;
 }
 
 @media screen and (max-width: 1250px){

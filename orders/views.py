@@ -1,13 +1,23 @@
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import CreateUser
 from .decorators import Unauthenticated_user
-from django.contrib import messages
+from .models import *
 
 # Create your views here.
+Menu = {
+'pizza': Pizza.objects.all(),
+'salad': Salad.objects.all(),
+'sub': Sub.objects.all(),
+'dinnerplatter': DinnerPlatter.objects.all(),
+'pasta': Pasta.objects.all(),
+'topping': Topping.objects.all(),
+}
+
 def index(request):
 
     if request.session.get("user") is not None:
@@ -17,6 +27,12 @@ def index(request):
 
     context = {
     'msg': user,
+    'pizzas': Menu['pizza'],
+    'subs': Menu['sub'],
+    'pastas': Menu['pasta'],
+    'dinner_platters': Menu['dinnerplatter'],
+    'salads': Menu['salad'],
+    'toppings': Menu['topping'],
     }
     return render(request, "orders/index.html", context)
 

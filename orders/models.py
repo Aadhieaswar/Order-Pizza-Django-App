@@ -7,10 +7,10 @@ class Pizza(models.Model):
     pizza = models.CharField(max_length = 64)
     type = models.CharField(max_length = 64)
     size_choices = [
-    ('SM', 'Small'),
-    ('LG', 'Large')
+    ('Small', 'SM'),
+    ('Large', 'LG')
     ]
-    size = models.CharField(max_length = 2, choices = size_choices)
+    size = models.CharField(max_length = 5, choices = size_choices)
     cost = models.FloatField(blank = False)
 
     def __str__(self):
@@ -26,10 +26,10 @@ class Topping(models.Model):
 class Sub(models.Model):
     sub = models.CharField(max_length = 64)
     size_choices = [
-    ('SM', 'Small'),
-    ('LG', 'Large')
+    ('Small', 'SM'),
+    ('Large', 'LG')
     ]
-    size = models.CharField(max_length = 2, choices = size_choices)
+    size = models.CharField(max_length = 5, choices = size_choices)
     cost = models.FloatField(blank = False)
 
     def __str__(self):
@@ -52,10 +52,10 @@ class Salad(models.Model):
 class DinnerPlatter(models.Model):
     platter = models.CharField(max_length = 64)
     size_choices = [
-    ('SM', 'Small'),
-    ('LG', 'Large')
+    ('Small', 'SM'),
+    ('Large', 'LG')
     ]
-    size = models.CharField(max_length = 2, choices = size_choices)
+    size = models.CharField(max_length = 5, choices = size_choices)
     cost = models.FloatField(blank = False)
 
     def __str__(self):

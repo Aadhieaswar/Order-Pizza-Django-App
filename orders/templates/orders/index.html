@@ -36,8 +36,87 @@ Pinocchio's Pizza
 </div>
 
 <!-- Content -->
-<div style="text-align: center; width: 100%; margin-top: 20px;">
+<nav class="navbar navbar-light bg-warning cus-nav">
+
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link white" href="#pizzas">Pizza</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#pizzaToppings">Pizza Topppings</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#subs">Subs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#pastas">Pasta</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#salads">Salad</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#DPs">Dinner Platters</a>
+    </li>
+  </ul>
+
+</nav>
+<div style="text-align: center; width: 100%; margin-top: 20px; margin-bottom: 40px;">
 <div class="badge badge-info" style="justify-content: center; font-size: 40px;">{{ msg }}</div>
+
+<h1 class="center menu-head" id="pizzas"> Pizza </h1>
+<ul class="card-ul">
+{% for pizza in pizzas %}
+<li class="card center errorlist card-li">
+  {{ pizza }}
+</li>
+{% endfor %}
+</ul>
+
+<h1 class="center menu-head" id="pizzaToppings"> Pizza Toppings </h1>
+<ul class="card-ul">
+{% for top in toppings %}
+<li class="card center errorlist card-li">
+  {{ top }}
+</li>
+{% endfor %}
+</ul>
+
+<h1 class="center menu-head" id="subs"> Subs </h1>
+<ul class="card-ul">
+{% for sub in subs %}
+<li class="card center errorlist card-li">
+  {{ sub }}
+</li>
+{% endfor %}
+</ul>
+
+<h1 class="center menu-head" id="pastas"> Pasta </h1>
+<ul class="card-ul">
+{% for pasta in pastas %}
+<li class="card center errorlist card-li">
+  {{ pasta }}
+</li>
+{% endfor %}
+</ul>
+
+<h1 class="center menu-head" id="salads"> Salad </h1>
+<ul class="card-ul">
+{% for salad in salads %}
+<li class="card center errorlist card-li">
+  {{ salad }}
+</li>
+{% endfor %}
+</ul>
+
+<h1 class="center menu-head" id="DPs"> Dinner Platters </h1>
+<ul class="card-ul">
+{% for DP in dinner_platters %}
+<li class="card center errorlist card-li">
+  {{ DP }}
+</li>
+{% endfor %}
+</ul>
+
 </div>
 
 {% endblock %}
