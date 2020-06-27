@@ -171,32 +171,51 @@ footer {
   width: 95%;
   margin-left: 2.5%;
   margin-right: 2.5%;
-  display: inline-flex;
-  flex-wrap: wrap;
   justify-content: center;
   padding-bottom: 40px;
   border-bottom: 1px solid lightgrey;
-  border-width: 60%;
+  margin-bottom: 20px;
 }
 
 .card-li {
   padding: 5px;
-  width: 24%;
+  width: 25%;
   margin: 5px;
   color: black;
   font-size: 20px;
   font-family: "Lobster";
-  border: 2px solid #f6800a;
+  border-bottom: 2px solid #f6800a;
+  border-right: 5px double #f6800a;
+}
+
+.table-head {
+  font-family: "Lobster";
+  color: orange;
+  border-bottom: 5px double #f6800a;
+  border-right: 5px double #f6800a;
+  padding: 5px;
+  background-color: black;
+}
+
+.end {
+  border-right: none;
+}
+
+.hover-style:hover {
+  background-color: orange;#f6800a;
+  transform: scale(1.025);
+}
+
+.hover-style:hover .card-li {
+  color: white;
+  border-right: 2px solid white;
+  font-size: 25px;
 }
 
 .menu-head {
   color: #f6800a;
   font-family: "Lobster";
-}
-
-.card-li:hover {
-  color: white;
-  background-color: #f6800a;
+  width: 100%;
 }
 
 .cus-nav {
@@ -216,6 +235,15 @@ footer {
 .white:hover {
   background-color: white;
   color: #f6800a;
+}
+
+.table-cus {
+  width: 60%;
+  margin-left: 20%;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  border: 5px double #f6800a;
 }
 
 @media screen and (max-width: 1250px){

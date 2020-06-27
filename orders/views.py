@@ -80,9 +80,4 @@ def _logout(request):
     logout(request)
     request.session.clear()
 
-    context = {
-    'title': 'Session end',
-    'note': 'You have successfull been Logged Out!'
-    }
-
-    return render(request, "orders/message.html", context)
+    return redirect("home")

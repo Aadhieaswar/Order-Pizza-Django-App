@@ -61,61 +61,109 @@ Pinocchio's Pizza
 
 </nav>
 <div style="text-align: center; width: 100%; margin-top: 20px; margin-bottom: 40px;">
-<div class="badge badge-info" style="justify-content: center; font-size: 40px;">{{ msg }}</div>
+<div class="badge badge-dark" style="justify-content: center; font-size: 40px;">{{ msg }}</div>
 
-<h1 class="center menu-head" id="pizzas"> Pizza </h1>
-<ul class="card-ul">
+<div class="card-ul">
+<table class="table-cus">
+  <h1 class="center menu-head" id="pizzas"> Pizza </h1>
+<tr>
+  <th class="table-head"><h4>Type</h4></th>
+  <th class="table-head"><h4>Pizza</h4></th>
+  <th class="table-head"><h4>Size</h4></th>
+  <th class="table-head end"><h4>Cost</h4></th>
+</tr>
 {% for pizza in pizzas %}
-<li class="card center errorlist card-li">
-  {{ pizza }}
-</li>
+<tr title="{{ pizza }}" class="center hover-style">
+  <td class="card-li"> {{ pizza.type }}</td>
+  <td class="card-li">{{ pizza.pizza }}</td>
+  <td class="card-li">{{ pizza.size }}</td>
+  <td class="card-li end">${{ pizza.cost|floatformat:2 }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
+<div class="card-ul">
+  <table class="table-cus">
 <h1 class="center menu-head" id="pizzaToppings"> Pizza Toppings </h1>
-<ul class="card-ul">
+<tr>
+  <th class="table-head"><h4>Toppings</h4></th>
+</tr>
 {% for top in toppings %}
-<li class="card center errorlist card-li">
-  {{ top }}
-</li>
+<tr title="{{ top }}" class="center hover-style">
+  <td class="card-li end">{{ top }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
-<h1 class="center menu-head" id="subs"> Subs </h1>
-<ul class="card-ul">
+<div class="card-ul">
+<table class="table-cus">
+  <h1 class="center menu-head" id="subs"> Subs </h1>
+<tr>
+  <th class="table-head"><h4>Sub</h4></th>
+  <th class="table-head"><h4>Size</h4></th>
+  <th class="table-head end"><h4>Cost</h4></th>
+</tr>
 {% for sub in subs %}
-<li class="card center errorlist card-li">
-  {{ sub }}
-</li>
+<tr title="{{ sub }}" class="center hover-style">
+  <td class="card-li">{{ sub.sub }}</td>
+  <td class="card-li">{{ sub.size }}</td>
+  <td class="card-li end">${{ sub.cost|floatformat:2 }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
-<h1 class="center menu-head" id="pastas"> Pasta </h1>
-<ul class="card-ul">
+<div class="card-ul">
+<table class="table-cus">
+  <h1 class="center menu-head" id="pastas"> Pasta </h1>
+<tr>
+  <th class="table-head"><h4>Pasta</h4></th>
+  <th class="table-head end"><h4>Cost</h4></th>
+</tr>
 {% for pasta in pastas %}
-<li class="card center errorlist card-li">
-  {{ pasta }}
-</li>
+<tr title="{{ pasta }}" class="center hover-style">
+  <td class="card-li">{{ pasta.pasta }}</td>
+  <td class="card-li end">${{ pasta.cost|floatformat:2 }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
-<h1 class="center menu-head" id="salads"> Salad </h1>
-<ul class="card-ul">
+<div class="card-ul">
+<table class="table-cus">
+  <h1 class="center menu-head" id="salads"> Salad </h1>
+<tr>
+  <th class="table-head"><h4>Salad</h4></th>
+  <th class="table-head end"><h4>Cost</h4></th>
+</tr>
 {% for salad in salads %}
-<li class="card center errorlist card-li">
-  {{ salad }}
-</li>
+<tr title="{{ salad }}" class="center hover-style">
+  <td class="card-li">{{ salad.salad }}</td>
+  <td class="card-li end">${{ salad.cost|floatformat:2 }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
+<div class="card-ul">
+<table class="table-cus">
 <h1 class="center menu-head" id="DPs"> Dinner Platters </h1>
-<ul class="card-ul">
+<tr>
+  <th class="table-head"><h4>Platters</h4></th>
+  <th class="table-head"><h4>Size</h4></th>
+  <th class="table-head end"><h4>Cost</h4></th>
+</tr>
 {% for DP in dinner_platters %}
-<li class="card center errorlist card-li">
-  {{ DP }}
-</li>
+<tr title="{{ DP }}" class="center hover-style">
+  <td class="card-li">{{ DP.platter }}</td>
+  <td class="card-li">{{ DP.size }}</td>
+  <td class="card-li end">${{ DP.cost|floatformat:2 }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
 </div>
 
