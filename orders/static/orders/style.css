@@ -183,18 +183,18 @@ footer {
   margin: 5px;
   color: black;
   font-size: 20px;
-  font-family: "Lobster";
   border-bottom: 2px solid #f6800a;
-  border-right: 5px double #f6800a;
+  border-right: 5px solid #f6800a;
+  font-weight: bold;
 }
 
 .table-head {
-  font-family: "Lobster";
   color: orange;
-  border-bottom: 5px double #f6800a;
-  border-right: 5px double #f6800a;
+  border-bottom: 5px solid #f6800a;
+  border-right: 5px solid #f6800a;
   padding: 5px;
   background-color: black;
+  font-weight: bold;
 }
 
 .end {
@@ -243,18 +243,47 @@ footer {
   justify-content: center;
   text-align: center;
   background-color: white;
-  border: 5px double #f6800a;
+  border: 5px solid #f6800a;
+}
+
+.right {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  margin-bottom: 11%;
+  margin-right: 2.5%;
+}
+
+.order-btn {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.black-bor {
+  border: 2px solid black;
+}
+
+#order-list {
+  min-height: 500px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.order-items {
+  list-style-type: none;
+
 }
 
 @media screen and (max-width: 1250px){
-  .card {
+  .card, .table-cus {
     width: 70%;
     margin-left: 15%;
   }
 }
 
 @media screen and (max-width: 800px){
-  .card {
+  .card, .table-cus {
     width: 80%;
     margin-left: 10%;
   }
@@ -265,6 +294,10 @@ footer {
   .card {
     width: 90%;
     margin-left: 5%;
+  }
+  .table-cus {
+    width: 99%;
+    margin-left: 0.5%;
   }
   .inv {
     display: none;

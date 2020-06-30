@@ -9,6 +9,7 @@ from .decorators import Unauthenticated_user
 from .models import *
 
 # Create your views here.
+
 Menu = {
 'pizza': Pizza.objects.all(),
 'salad': Salad.objects.all(),

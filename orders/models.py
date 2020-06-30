@@ -63,14 +63,17 @@ class DinnerPlatter(models.Model):
 
 #class Cart(models.Model):
 #    user = models.ForeignKey(User, on_delete = models.CASCADE)
+#    date_ordered = models.DateTimeField(auto_now_add=True)
 #    item_choices = [
-#    ('PIZ', 'Pizza'),
-#    ('SUB', 'Sub'),
-#    ('PAS', 'Pasta'),
-#    ('SAL', 'Salad'),
-#    ('DPL', 'DinnerPlatter')
+#    ('Pizza', 'PIZ'),
+#    ('Sub', 'SUB'),
+#    ('Pasta', 'PAS'),
+#    ('Salad', 'SAL'),
+#    ('DinnerPlatter', 'DPL')
 #    ]
-#    item = models.CharField(max_length = 3, choices = item_choices)
+#    item_type = models.CharField(max_length = 3, choices = item_choices, blank=False, null=False)
+#    item = models.ForeignKey(self.item_type, on_delete = models.SET_NULL)
+
 
 #class Order(models.Model):
 #    user = models.ForeignKey(User, on_delete = models.CASCADE)

@@ -11,6 +11,12 @@ Pinocchio's Pizza
 
 {% block body %}
 
+<script>
+
+  var user = '{{ request.user }}'
+
+</script>
+
 <!-- NavBar -->
 <div class="head">
   <div class="row" style="margin-bottom: 20px;">
@@ -73,7 +79,7 @@ Pinocchio's Pizza
   <th class="table-head end"><h4>Cost</h4></th>
 </tr>
 {% for pizza in pizzas %}
-<tr title="{{ pizza }}" class="center hover-style">
+<tr title="{{ pizza }}" data-item="{{ pizza.id }}" data-type="Pizza" class="center hover-style cart-add">
   <td class="card-li"> {{ pizza.type }}</td>
   <td class="card-li">{{ pizza.pizza }}</td>
   <td class="card-li">{{ pizza.size }}</td>
@@ -90,7 +96,7 @@ Pinocchio's Pizza
   <th class="table-head"><h4>Toppings</h4></th>
 </tr>
 {% for top in toppings %}
-<tr title="{{ top }}" class="center hover-style">
+<tr title="{{ top }}" data-item="{{ top.id }}" data-type="Topping" class="center hover-style cart-add">
   <td class="card-li end">{{ top }}</td>
 </tr>
 {% endfor %}
@@ -106,7 +112,7 @@ Pinocchio's Pizza
   <th class="table-head end"><h4>Cost</h4></th>
 </tr>
 {% for sub in subs %}
-<tr title="{{ sub }}" class="center hover-style">
+<tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
   <td class="card-li">{{ sub.sub }}</td>
   <td class="card-li">{{ sub.size }}</td>
   <td class="card-li end">${{ sub.cost|floatformat:2 }}</td>
@@ -123,7 +129,7 @@ Pinocchio's Pizza
   <th class="table-head end"><h4>Cost</h4></th>
 </tr>
 {% for pasta in pastas %}
-<tr title="{{ pasta }}" class="center hover-style">
+<tr title="{{ pasta }}" data-item="{{ pasta.id }}" data-type="Pasta" class="center hover-style cart-add">
   <td class="card-li">{{ pasta.pasta }}</td>
   <td class="card-li end">${{ pasta.cost|floatformat:2 }}</td>
 </tr>
@@ -139,7 +145,7 @@ Pinocchio's Pizza
   <th class="table-head end"><h4>Cost</h4></th>
 </tr>
 {% for salad in salads %}
-<tr title="{{ salad }}" class="center hover-style">
+<tr title="{{ salad }}" data-item={{salad.id}} data-type="Salad" class="center hover-style cart-add">
   <td class="card-li">{{ salad.salad }}</td>
   <td class="card-li end">${{ salad.cost|floatformat:2 }}</td>
 </tr>
@@ -156,7 +162,7 @@ Pinocchio's Pizza
   <th class="table-head end"><h4>Cost</h4></th>
 </tr>
 {% for DP in dinner_platters %}
-<tr title="{{ DP }}" class="center hover-style">
+<tr title="{{ DP }}" data-item="{{ DP.id }}" data-type="DinnerPlatter" class="center hover-style cart-add">
   <td class="card-li">{{ DP.platter }}</td>
   <td class="card-li">{{ DP.size }}</td>
   <td class="card-li end">${{ DP.cost|floatformat:2 }}</td>
@@ -166,5 +172,35 @@ Pinocchio's Pizza
 </div>
 
 </div>
+
+{% if request.user.is_authenticated %}
+
+<div class="right" style="display: flex;">
+
+  <button title="Click to start your order" type="button" class="btn btn-light black-bor" id="order">
+    <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
+  </button>
+
+  <div class="card" id="order-list">
+
+  <div class="card-header" style="height: 60px; margin: 0;">
+    <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn float-left">
+    <button class="cross btn btn-light" style="top: 0; float: right; color: red; margin: 0; border: 2px solid red; font-weight: bold;" title="Close"> ⤫ </button>
+  </div>
+    <div class="text-muted" style="width: 80%; margin-left: 10%; margin-top: 10px;">Click on the menu items you would like to order</div>
+    <div class="dropdown-divider"></div>
+
+    <ul class="order-items">
+      <!-- Order Items -->
+    </ul>
+
+  </div>
+
+</div>
+
+
+<script src="{% static 'orders/cart.js' %}"></script>
+
+{% endif %}
 
 {% endblock %}
