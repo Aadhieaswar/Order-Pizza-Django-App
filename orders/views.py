@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import CreateUser
-from .decorators import Unauthenticated_user
+from .decorators import Unauthenticated_user, Authenticated_user
 from .models import *
 
 # Create your views here.
@@ -68,7 +68,7 @@ def signup_view(request):
         form = CreateUser(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect("home")
 
     context = {
     'form': form,
@@ -82,3 +82,8 @@ def _logout(request):
     request.session.clear()
 
     return redirect("home")
+
+@Authenticated_user
+def cart(request):
+
+    return render(request, "orders/cart.html")

@@ -1,11 +1,15 @@
-{% extends "orders/base.html" %} {% load static %}
+{% extends "orders/base.html" %}
+
+<!-- note: empty comments are added purely to be able to read code better -->
+
+{% load static %}
 
 <!-- title -->
-{% block title %} Pinocchio's Pizza {% endblock %} {% block body %}
+{% block title %} Pinocchio's Pizza {% endblock %}
 
-<script>
-    var user = '{{ request.user }}';
-</script>
+<!--  -->
+
+{% block body %}
 
 <!-- NavBar -->
 <div class="head">
@@ -20,8 +24,14 @@
 
             {% if not request.user.is_authenticated %}
             <a class="link-white" href="{% url 'login_view' %}">logIn</a>
-            <a class="link-white" href="{% url 'signup_view' %}">SignUp</a> {% endif %} {% if request.user.is_authenticated %}
-            <a class="link-white" href="{% url '_logout' %}">logOut</a> {% endif %}
+            <a class="link-white" href="{% url 'signup_view' %}">SignUp</a>
+            <!--  -->
+            {% endif %}
+            <!--   -->
+            {% if request.user.is_authenticated %}
+            <a class="link-white" href="{% url '_logout' %}">logOut</a>
+            <!--   -->
+            {% endif %}
 
         </div>
     </div>
@@ -76,7 +86,7 @@
             <tr title="{{ pizza }}" data-item="{{ pizza.id }}" data-type="Pizza" class="center hover-style cart-add">
                 <td class="card-li"> {{ pizza.type }}</td>
                 <td class="card-li">{{ pizza.pizza }}</td>
-                <td class="card-li">{{ pizza.small }}</td>
+                <td class="card-li">${{ pizza.small }}</td>
                 <td class="card-li end">${{ pizza.large }}</td>
             </tr>
             {% endfor %}
@@ -102,6 +112,9 @@
     <div class="card-ul">
         <table class="table-cus">
             <h1 class="center menu-head" id="subs"> Subs </h1>
+            <h4 class="center text-muted text-15">
+                The Items that start with '+' sign indicate items which can be purchased additionaly with the other Subs
+            </h4>
             <tr>
                 <th class="table-head">
                     <h4>Sub</h4>
@@ -116,7 +129,7 @@
             {% for sub in subs %}
             <tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
                 <td class="card-li">{{ sub.sub }}</td>
-                <td class="card-li">{{ sub.small }}</td>
+                <td class="card-li">${{ sub.small }}</td>
                 <td class="card-li end">${{ sub.large }}</td>
             </tr>
             {% endfor %}
@@ -131,7 +144,7 @@
                     <h4>Pasta</h4>
                 </th>
                 <th class="table-head end">
-                    <h4>Cost</h4>
+                    <h4>Regular</h4>
                 </th>
             </tr>
             {% for pasta in pastas %}
@@ -151,7 +164,7 @@
                     <h4>Salad</h4>
                 </th>
                 <th class="table-head end">
-                    <h4>Cost</h4>
+                    <h4>Regular</h4>
                 </th>
             </tr>
             {% for salad in salads %}
@@ -180,7 +193,7 @@
             {% for DP in dinner_platters %}
             <tr title="{{ DP }}" data-item="{{ DP.id }}" data-type="DinnerPlatter" class="center hover-style cart-add">
                 <td class="card-li">{{ DP.platter }}</td>
-                <td class="card-li">{{ DP.small }}</td>
+                <td class="card-li">${{ DP.small }}</td>
                 <td class="card-li end">${{ DP.large }}</td>
             </tr>
             {% endfor %}
@@ -193,28 +206,14 @@
 
 <div class="right" style="display: flex;">
 
-    <button title="Click to start your order" type="button" class="btn btn-light black-bor" id="order">
-    <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
-  </button>
-
-    <div class="card" id="order-list">
-
-        <div class="card-header" style="height: 60px; margin: 0;">
-            <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn float-left">
-            <button class="cross btn btn-light" style="top: 0; float: right; color: red; margin: 0; border: 2px solid red; font-weight: bold;" title="Close"> ⤫ </button>
-        </div>
-        <div class="text-muted" style="width: 80%; margin-left: 10%; margin-top: 10px;">Click on the menu items you would like to order</div>
-        <div class="dropdown-divider"></div>
-
-        <ul class="order-items">
-            <!-- Order Items -->
-        </ul>
-
-    </div>
+    <a title="Click to start your order" href="{% url 'cart' %}" class="btn btn-light black-bor" id="order">
+        <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
+    </a>
 
 </div>
 
+{% endif %}
 
-<script src="{% static 'orders/cart.js' %}"></script>
+<!--   -->
 
-{% endif %} {% endblock %}
+{% endblock %}

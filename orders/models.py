@@ -46,3 +46,11 @@ class DinnerPlatter(models.Model):
 
     def __str__(self):
         return f"{self.platter} - Small: ${self.small} - Large: ${self.large}"
+
+#class PizzaCart(models.Model):
+#   customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer")
+#    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE, related_name="pizza")
+#    toppping1 = models.ForeignKey(Topping, on_delete=models.CASCADE)
+#    toppping2 = models.ForeignKey(Topping, on_delete=models.CASCADE)
+#    topping3 = models.ForeignKey(Topping, on_delete=models.CASCADE)
+#    total = models.ForegnKey()

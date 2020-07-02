@@ -273,6 +273,24 @@ footer {
     list-style-type: none;
 }
 
+.text-15 {
+    font-size: 15px;
+}
+
+.cart-container {
+    width: 90%;
+    margin-top: 50px;
+    margin-left: 5%;
+    border: 2px solid rgb(97, 94, 94);
+    min-height: 400px;
+}
+
+.bold-30 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
 @media screen and (max-width: 1250px) {
     .card,
     .table-cus {
