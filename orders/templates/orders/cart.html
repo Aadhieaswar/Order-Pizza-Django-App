@@ -1,13 +1,13 @@
 {% extends "orders/base.html" %}
 
-<!-- note: empty comments are added purely to be able to read code better -->
-
 {% load static %}
 
 <!-- title -->
-{% block title %} Cart {% endblock %}
+{% block title %} 
 
-<!--  -->
+Cart 
+
+{% endblock %}
 
 {% block body %}
 
@@ -22,26 +22,75 @@
         </div>
         <div class="col" style="margin-top: 10px;">
 
-            {% if not request.user.is_authenticated %}
-            <a class="link-white" href="{% url 'login_view' %}">logIn</a>
-            <a class="link-white" href="{% url 'signup_view' %}">SignUp</a>
-            <!--  -->
-            {% endif %}
-
             <a class="link-white" href="{% url 'home' %}">Home</a>
-            <!--  -->
-            {% if request.user.is_authenticated %}
             <a class="link-white" href="{% url '_logout' %}">LogOut</a>
-            <!--  -->
-            {% endif %}
 
         </div>
     </div>
-</div>
 
 <!-- Content -->
 
-<div class="card cart-container">
+<div class="row order-strip box-shadow">
+    <div class="col">
+        &nbsp Order Pizza
+    </div>
+
+    <div class="col">
+    </div>
+
+    <div class="col">
+        <a href="#" title="Click to add pizza to your cart" class="add-button">
+            &#xFF0B Add Item 
+        </a>
+    </div>
+</div>
+
+<form action="#" class="card" method="post">
+    {% csrf_token %}
+
+</form>
+
+<div class="row order-strip box-shadow">
+    <div class="col">
+        &nbsp Order Pizza
+    </div>
+
+    <div class="col">
+    </div>
+
+    <div class="col">
+        <a href="#" title="Click to add pizza to your cart" class="add-button">
+            &#xFF0B Add Item 
+        </a>
+    </div>
+</div>
+
+<form action="#" class="card" method="post">
+    {% csrf_token %}
+
+</form>
+
+<div class="row order-strip box-shadow">
+    <div class="col">
+        &nbsp Order Pizza
+    </div>
+
+    <div class="col">
+    </div>
+
+    <div class="col">
+        <a href="#" title="Click to add pizza to your cart" class="add-button">
+            &#xFF0B Add Item 
+        </a>
+    </div>
+</div>
+
+<form action="#" class="card" method="post">
+    {% csrf_token %}
+
+</form>
+
+<div class="card cart-container box-shadow">
     <div class="card-header bold-30">
 
         {{ request.user }}'s Cart

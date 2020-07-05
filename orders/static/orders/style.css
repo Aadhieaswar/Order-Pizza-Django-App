@@ -243,6 +243,7 @@ footer {
     text-align: center;
     background-color: white;
     border: 5px solid #f6800a;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .right {
@@ -263,16 +264,6 @@ footer {
     border: 2px solid black;
 }
 
-#order-list {
-    min-height: 500px;
-    min-width: 200px;
-    text-align: center;
-}
-
-.order-items {
-    list-style-type: none;
-}
-
 .text-15 {
     font-size: 15px;
 }
@@ -289,6 +280,47 @@ footer {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+    color: black;
+}
+
+.box-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.order-strip {
+    width: 90%;
+    height: 35px;
+    margin-left: 5%;
+    background-color: #0398fc;
+    display: inline-flex;
+    font-size: 20px;
+    color: white;
+    border-radius: 3px;
+    border: 2px solid white;
+    top: 0;
+}
+
+.add-button {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 4px;
+    float: right;
+    padding-right: 10px;
+    padding-left: 8px;
+}
+
+a.add-button {
+    text-decoration: none;
+    color: #03fc39;
+}
+
+.add-button:hover {
+    background-color: #008ce9;
+}
+
+a.add-button:hover {
+    color: #05e736;
 }
 
 @media screen and (max-width: 1250px) {
