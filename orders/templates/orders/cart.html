@@ -18,8 +18,7 @@ Cart
             <img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
             <h1 class="title-lobster">Pinocchio's Pizza</h1>
         </div>
-        <div class="col">
-        </div>
+       
         <div class="col" style="margin-top: 10px;">
 
             <a class="link-white" href="{% url 'home' %}">Home</a>
@@ -27,67 +26,75 @@ Cart
 
         </div>
     </div>
+</div>
 
 <!-- Content -->
 
 <div class="row order-strip box-shadow">
     <div class="col">
-        &nbsp Order Pizza
-    </div>
-
-    <div class="col">
-    </div>
-
-    <div class="col">
-        <a href="#" title="Click to add pizza to your cart" class="add-button">
-            &#xFF0B Add Item 
-        </a>
+        &nbsp Order From Pinocchio's Pizza
     </div>
 </div>
 
-<form action="#" class="card" method="post">
+<form action="#" class="card item-order-form box-shadow" method="post">
     {% csrf_token %}
-
-</form>
-
-<div class="row order-strip box-shadow">
-    <div class="col">
-        &nbsp Order Pizza
+    <div class="bold-30" style="margin-top: 5px;"> Choose item to order </div>
+    <div class="order-input-container">
+        <select class="custom-select item-input" id="select-items" type="text">
+            <option value="default">Choose item...</option>
+            <option title="Pizza" value="Pizza">Pizza</option>
+            <option title="Sub" value="Sub">Sub</option>
+            <option title="Pasta" value="Pasta">Pasta</option>
+            <option title="Salad" value="Salad">Salad</option>
+            <option title="Dinner Platter" value="DinnerPlatter">Dinner Platter</option>
+        </select>
+        <button type="button" class="btn btn-dark item-button" id="order-item">Order</button>
     </div>
-
-    <div class="col">
+    <div class="center invalid-feedback sel-item-warn" id="warn">
+        Please choose an item to order
     </div>
+    <div class="pizza-options options">
+        <div class="bold-30" style="margin-bottom: 10px;"> Customize Your Pizza! </div>
 
-    <div class="col">
-        <a href="#" title="Click to add pizza to your cart" class="add-button">
-            &#xFF0B Add Item 
-        </a>
+        <select class="custom-select field-40" style="margin-bottom: 10px;">
+                <option value="none">Type</option>
+                <option title="Regular">Regular</option>
+                <option title="Sicilian">Sicilian</option>
+        </select>
+
+        <select class="custom-select field-40" style="margin-bottom: 10px;">
+                <option value="none">Size</option>
+                <option title="Small">Small</option>
+                <option title="Large">Large</option>
+        </select> 
+
+        <p>
+            <select class="custom-select field-40">
+                <option value="none">Topping-1</option>
+                {% for top in toppings %}
+                <option title="{{ top }}">{{ top }}</option>
+                {% endfor %}
+            </select>
+
+            <select class="custom-select field-40">
+                <option value="none">Toping-2</option>
+                {% for top in toppings %}
+                <option title="{{ top }}">{{ top }}</option>
+                {% endfor %}
+            </select>
+
+            <select class="custom-select field-40">
+                <option value="none">Topping-3</option>
+                {% for top in toppings %}
+                <option title="{{ top }}">{{ top }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <button type="submit" class="btn btn-dark">Add to Cart</button>
     </div>
-</div>
-
-<form action="#" class="card" method="post">
-    {% csrf_token %}
-
-</form>
-
-<div class="row order-strip box-shadow">
-    <div class="col">
-        &nbsp Order Pizza
+    <div class="sub-options options">
+    
     </div>
-
-    <div class="col">
-    </div>
-
-    <div class="col">
-        <a href="#" title="Click to add pizza to your cart" class="add-button">
-            &#xFF0B Add Item 
-        </a>
-    </div>
-</div>
-
-<form action="#" class="card" method="post">
-    {% csrf_token %}
-
 </form>
 
 <div class="card cart-container box-shadow">
@@ -97,5 +104,7 @@ Cart
 
     </div>
 </div>
+
+<script src="{% static 'orders/cart.js' %}"></script>
 
 {% endblock %}

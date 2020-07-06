@@ -111,7 +111,7 @@ Pinocchio's Pizza
         <table class="table-cus">
             <h1 class="center menu-head" id="subs"> Subs </h1>
             <h4 class="center text-muted text-15">
-                The Items that start with '+' sign indicate items which can be purchased additionaly with the other Subs
+                The Sausage, Peppers & Onions subs are available only as large subs
             </h4>
             <tr>
                 <th class="table-head">
@@ -129,6 +129,33 @@ Pinocchio's Pizza
                 <td class="card-li">{{ sub.sub }}</td>
                 <td class="card-li">${{ sub.small }}</td>
                 <td class="card-li end">${{ sub.large }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card-ul">
+        <table class="table-cus">
+            <h1 class="center menu-head" id="subs"> Extras for Subs </h1>
+            <h4 class="center text-muted text-15">
+                These Items can be purchased additionaly with any Sub
+            </h4>
+            <tr>
+                <th class="table-head">
+                    <h4>Extras</h4>
+                </th>
+                <th class="table-head">
+                    <h4>Small</h4>
+                </th>
+                <th class="table-head end">
+                    <h4>Large</h4>
+                </th>
+            </tr>
+            {% for add in sub_add %}
+            <tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
+                <td class="card-li">{{ add.item }}</td>
+                <td class="card-li">${{ add.small }}</td>
+                <td class="card-li end">${{ add.large }}</td>
             </tr>
             {% endfor %}
         </table>

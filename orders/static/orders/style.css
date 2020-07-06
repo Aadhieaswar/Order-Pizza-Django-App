@@ -274,6 +274,7 @@ footer {
     margin-left: 5%;
     border: 2px solid rgb(97, 94, 94);
     min-height: 400px;
+    margin-bottom: 50px;
 }
 
 .bold-30 {
@@ -291,36 +292,61 @@ footer {
     width: 90%;
     height: 35px;
     margin-left: 5%;
-    background-color: #0398fc;
+    background-color: black;
     display: inline-flex;
     font-size: 20px;
     color: white;
     border-radius: 3px;
     border: 2px solid white;
     top: 0;
+    margin-top: 20px;
 }
 
-.add-button {
-    text-decoration: none;
+.item-order-form {
+    justify-content: center;
+    text-align: center;
+    width: 90%;
+    margin-left: 5%;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    float: center;
+    background-color: orange;
+    border-right: 5px double white;
+    border-bottom: 5px double white;
+    border-left: 5px double white;
+}
+
+.item-input {
+    width: 40%;
+}
+
+.item-button {
+    width: 142.27px;
+    margin-left: 10px;
+}
+
+.order-input-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.sel-item-warn {
     font-weight: bold;
+    padding: 5px;
+    margin-top: -10px;
     font-size: 15px;
-    padding: 4px;
-    float: right;
-    padding-right: 10px;
-    padding-left: 8px;
 }
 
-a.add-button {
-    text-decoration: none;
-    color: #03fc39;
+.options {
+    display: none;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
-.add-button:hover {
-    background-color: #008ce9;
-}
-
-a.add-button:hover {
-    color: #05e736;
+.field-40 {
+    width: 30%;
 }
 
 @media screen and (max-width: 1250px) {

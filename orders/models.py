@@ -26,6 +26,13 @@ class Sub(models.Model):
     def __str__(self):
         return f"{self.sub} sub - Small: ${self.small} - Large: ${self.large}"
 
+class SubAdditional(models.Model):
+    item = models.CharField(max_length = 64)
+    small = models.DecimalField(max_digits = 4, decimal_places = 2)
+    large = models.DecimalField(max_digits = 4, decimal_places = 2)
+    def __str__(self):
+        return f"{self.item} - Small: ${self.small} - Large: ${self.large}"
+
 class Pasta(models.Model):
     pasta = models.CharField(max_length = 64)
     cost = models.DecimalField(max_digits = 4, decimal_places = 2)
@@ -47,10 +54,10 @@ class DinnerPlatter(models.Model):
     def __str__(self):
         return f"{self.platter} - Small: ${self.small} - Large: ${self.large}"
 
-#class PizzaCart(models.Model):
-#   customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer")
-#    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE, related_name="pizza")
-#    toppping1 = models.ForeignKey(Topping, on_delete=models.CASCADE)
-#    toppping2 = models.ForeignKey(Topping, on_delete=models.CASCADE)
-#    topping3 = models.ForeignKey(Topping, on_delete=models.CASCADE)
-#    total = models.ForegnKey()
+class Cart(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer")
+    item = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.item}: ${self.price}"

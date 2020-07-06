@@ -17,6 +17,7 @@ Menu = {
 'dinnerplatter': DinnerPlatter.objects.all(),
 'pasta': Pasta.objects.all(),
 'topping': Topping.objects.all(),
+'SubAdd': SubAdditional.objects.all(),
 }
 
 def index(request):
@@ -34,6 +35,7 @@ def index(request):
     'dinner_platters': Menu['dinnerplatter'],
     'salads': Menu['salad'],
     'toppings': Menu['topping'],
+    'sub_add': Menu['SubAdd'],
     }
     return render(request, "orders/index.html", context)
 
@@ -54,7 +56,6 @@ def login_view(request):
             return HttpResponseRedirect(reverse("home"))
         else:
             messages.warning(request, 'Invalid Credentials!')
-            print("fking cookies")
             return render(request, "orders/login.html")
 
     return render(request, "orders/login.html")
@@ -86,4 +87,14 @@ def _logout(request):
 @Authenticated_user
 def cart(request):
 
-    return render(request, "orders/cart.html")
+    context = {
+    'pizzas': Menu['pizza'],
+    'subs': Menu['sub'],
+    'pastas': Menu['pasta'],
+    'dinner_platters': Menu['dinnerplatter'],
+    'salads': Menu['salad'],
+    'toppings': Menu['topping'],
+    'sub_add': Menu['SubAdd'],
+    }
+
+    return render(request, "orders/cart.html", context)
