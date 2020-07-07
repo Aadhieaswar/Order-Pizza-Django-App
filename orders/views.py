@@ -1,11 +1,11 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.db import connection
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.db.models import Q
+from django.db import connection
 
 from decimal import *
 
@@ -117,6 +117,13 @@ def cart(request):
 
     return render(request, "orders/cart.html", context)
 
+# used to filter out empty toppings in the /add_to_cart/ url
+def removeNoneObjects(strObj):
+    if (len(strObj) != 4):
+        return True
+    else: 
+        return False 
+
 @Authenticated_user
 def submit_order(request):
 
@@ -205,6 +212,8 @@ def submit_order(request):
                 pPrice = item[0]
 
                 pizzaSize = pizzaSize.capitalize()
+
+                topArray = list(filter(removeNoneObjects, topArray))
 
                 # add item to the cart table
                 if (pizza_topping == "1-Topping"):
