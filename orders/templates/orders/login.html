@@ -28,7 +28,7 @@ Pinocchio's Pizza
 <!-- Content -->
 <div class="card card-custom">
   <div class="card-header center header-style">
-    <h4>LogIn to Pinoccio's Pizza!</h4>
+    <h4>LogIn to pinocchio's Pizza!</h4>
   </div>
   <form class="form0" action="{% url 'login_view' %}" method="post" autocomplete="off">
     {% csrf_token %}
@@ -47,7 +47,7 @@ Pinocchio's Pizza
 </div>
 {% if messages %}
   {% for message in messages %}
-<div class="center invalid-feedback warn-feed" style="display: block; font-weight: bold;">{{ message }}</div>
+<div class="center invalid-feedback warn-feed warning-message"> &#9888 {{ message }}</div>
   {% endfor %}
 {% endif %}
 <small class="form-text center" style="color: white;">Login to Pinocchio's Pizza to Order Pizza from us Online</small>
