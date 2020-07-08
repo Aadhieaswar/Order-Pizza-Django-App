@@ -29,8 +29,16 @@ def index(request):
 
     if request.session.get("user") is not None:
         user = "Welcome " + request.session["user"] + "!"
+        count = Cart.objects.filter(Q(customer=request.user)).count()
     else:
         user = ""
+        count = 0
+
+    if (count == 0):
+        count_message = "Your cart is empty"
+    else:
+        count_message = f"You have {count} item(s) in your cart"
+
 
     context = {
     'msg': user,
@@ -41,6 +49,8 @@ def index(request):
     'salads': Menu['salad'],
     'toppings': Menu['topping'],
     'sub_add': Menu['SubAdd'],
+    'count': count,
+    'count_message': count_message,
     }
     return render(request, "orders/index.html", context)
 
@@ -133,8 +143,8 @@ def cart(request):
 def removeNoneObjects(strObj):
     if (len(strObj) != 4):
         return True
-    else: 
-        return False 
+    else:
+        return False
 
 @Authenticated_user
 def submit_order(request):
@@ -209,6 +219,10 @@ def submit_order(request):
             try:
                 i = 0
                 topArray = [topping1, topping2, topping3]
+                
+                # removes repeated toppings
+                topArray = list(dict.fromkeys(topArray))
+
                 for top in topArray:
                     if (top != "none"):
                         i += 1
@@ -303,10 +317,10 @@ def submit_order(request):
             except:
                 messages.error(request, 'Please Submit a Valid Order!')
                 return redirect("cart")
-                
+
         # else loop as a layer of protection against the misuse of the HTML form
         else:
-            return HttpResponse("ERROR 404 NOT FOUND")
+            raise Http404("OOPS!😥 WE COULDN'T FIND THE ITEM YOU WANTED TO ORDER")
 
     return redirect("cart")
 
@@ -314,6 +328,7 @@ def submit_order(request):
 def checkOut(request):
 
     if request.method == "POST":
-        pass
+        
+        remove_items = Cart.objects.filter(Q(customer=request.user)).delete()
 
-    return ("cart")
+    return redirect("cart")

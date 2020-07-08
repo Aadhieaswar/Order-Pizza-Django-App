@@ -231,8 +231,9 @@ Pinocchio's Pizza
 
 <div class="right" style="display: flex;">
 
-    <a title="Click to start your order" href="{% url 'cart' %}" class="btn btn-light black-bor box-shadow" id="order">
+    <a title="{{ count_message }}" href="{% url 'cart' %}" class="btn btn-light black-bor box-shadow" id="order">
         <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
+        <span class="badge badge-success">{{ count }}</span>
     </a>
 
 </div>

@@ -244,9 +244,12 @@ Cart
     <div class="col center style-cost">
         Total Items: <strong class="bold-30"> {{ count }} </strong>
     </div>
+
     <form action="{% url 'check_out' %}" method="post" class="col float-right">
+    {% csrf_token %}
     <button type="submit" class="btn btn-primary float-right">Check Out</button>
     </form>
+    
     </div>
     {% endif %}
 
