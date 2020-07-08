@@ -226,22 +226,25 @@ Cart
 </form>
 
 <div class="card cart-container box-shadow">
-    <div class="card-header bold-30">
+    <div class="card-header bold-30 bg-dark" style="color: lightgreen;">
 
         {{ request.user }}'s Cart
 
     </div>
-    <div class="card-body">
+    <div class="card-body body-container">
     {% if cart_items %}
         {% for item in cart_items %}
-        <div class="alert alert-warning" title="{{ item }}" >{{ item }}</div>
+        <div class="alert alert-success" title="{{ item }}" >{{ item }}</div>
         {% endfor %}
     </div> 
-    <div class="card-footer footer-card-content">
-    <div class="col float-left style-cost">
-        Total (includes +8% HST): ${{ price }}
+    <div class="card-footer footer-card-content bg-dark">
+    <div class="col center style-cost">
+        Total (includes +8% HST): <strong class="bold-30"> ${{ price }} </strong>
     </div>
-    <form action="#" method="post" class="col float-right">
+    <div class="col center style-cost">
+        Total Items: <strong class="bold-30"> {{ count }} </strong>
+    </div>
+    <form action="{% url 'check_out' %}" method="post" class="col float-right">
     <button type="submit" class="btn btn-primary float-right">Check Out</button>
     </form>
     </div>

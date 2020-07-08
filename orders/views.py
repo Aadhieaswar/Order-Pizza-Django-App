@@ -96,19 +96,22 @@ def cart(request):
 
     totalCost = 0
 
+    count = 0
+
+    HST = Decimal(1.08)
+
     person_id = request.user.id
 
-    try: 
-        query = f"SELECT * FROM orders_cart WHERE customer_id = {person_id}"
-        query1 = f"SELECT price FROM orders_cart WHERE customer_id = {person_id}"
-
-        for items in Cart.objects.raw(query):
+    try:
+        for items in Cart.objects.filter(Q(customer=request.user)):
+            count += 1
             cart_items.append(items)
 
-        for price in Cart.objects.raw(query1):
+        for price in Cart.objects.values_list('price', flat=True).filter(Q(customer=request.user)):
             totalCost += price
-        
-    except: 
+
+        CostAfterInterest = Decimal("%.2f" % (totalCost * HST))
+    except:
         pass
 
     context = {
@@ -120,7 +123,8 @@ def cart(request):
     'toppings': Menu['topping'],
     'sub_add': Menu['SubAdd'],
     'cart_items': cart_items,
-    'price': (totalCost * 1.08),
+    'price': CostAfterInterest,
+    'count': count,
     }
 
     return render(request, "orders/cart.html", context)
@@ -299,8 +303,17 @@ def submit_order(request):
             except:
                 messages.error(request, 'Please Submit a Valid Order!')
                 return redirect("cart")
+                
         # else loop as a layer of protection against the misuse of the HTML form
         else:
             return HttpResponse("ERROR 404 NOT FOUND")
 
     return redirect("cart")
+
+@Authenticated_user
+def checkOut(request):
+
+    if request.method == "POST":
+        pass
+
+    return ("cart")

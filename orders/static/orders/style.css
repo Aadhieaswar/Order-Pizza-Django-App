@@ -25,7 +25,7 @@ footer {
 
 .footer-content {
     color: orange;
-    background-color: black;
+    background-color: #1d2124;
     display: flex;
     border-top: 5px solid orange;
     flex-wrap: wrap;
@@ -36,7 +36,7 @@ footer {
 }
 
 .head {
-    background-color: black;
+    background-color: #1d2124;
     box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 15px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 5px;
     border-bottom: 5px solid white;
@@ -75,17 +75,17 @@ footer {
 .link-white {
     float: right;
     font-weight: bold;
-    color: white;
+    color: lightgreen;
     padding: 10px;
-    border: 2px solid white;
+    border: 2px solid lightgreen;
     border-radius: 5px;
     text-decoration: none;
     margin: 10px;
 }
 
 .link-white:hover {
-    color: black;
-    background-color: white;
+    color: #1d2124;
+    background-color: lightgreen;
     text-decoration: none;
 }
 
@@ -162,7 +162,7 @@ footer {
 
 .header-style {
     border-bottom: 5px solid white;
-    background-color: black;
+    background-color: #1d2124;
     color: white
 }
 
@@ -180,7 +180,7 @@ footer {
     padding: 5px;
     width: 25%;
     margin: 5px;
-    color: black;
+    color: #1d2124;
     font-size: 20px;
     border-bottom: 2px solid #f6800a;
     border-right: 5px solid #f6800a;
@@ -192,7 +192,7 @@ footer {
     border-bottom: 5px solid #f6800a;
     border-right: 5px solid #f6800a;
     padding: 5px;
-    background-color: black;
+    background-color: #1d2124;
     font-weight: bold;
 }
 
@@ -261,7 +261,7 @@ footer {
 }
 
 .black-bor {
-    border: 2px solid black;
+    border: 2px solid #1d2124;
 }
 
 .text-15 {
@@ -272,16 +272,21 @@ footer {
     width: 90%;
     margin-top: 50px;
     margin-left: 5%;
-    border: 2px solid rgb(97, 94, 94);
+    border: 2px solid #1d2124;
     min-height: 400px;
     margin-bottom: 50px;
+}
+
+.body-container {
+    height: 450px;
+    overflow-y: auto;
 }
 
 .bold-30 {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-    color: black;
+    color: #1d2124;
 }
 
 .box-shadow {
@@ -292,12 +297,12 @@ footer {
     width: 90%;
     height: 35px;
     margin-left: 5%;
-    background-color: black;
+    background-color: #1d2124;
     display: inline-flex;
     font-size: 20px;
-    color: white;
+    color: lightgreen;
     border-radius: 3px;
-    border: 2px solid white;
+    border: 2px solid #1d2124;
     top: 0;
     margin-top: 20px;
 }
@@ -311,9 +316,6 @@ footer {
     border-top-left-radius: 0;
     float: center;
     background-color: orange;
-    border-right: 5px double white;
-    border-bottom: 5px double white;
-    border-left: 5px double white;
 }
 
 .item-input {
@@ -351,9 +353,9 @@ footer {
 
 .item-display {
     padding: 10px;
-    background-color: #f1f1f1;
+    background-color: lightgreen;
     margin-bottom: -15px;
-    border: 2px solid black;
+    border: 2px solid #1d2124;
     font-weight: bold;
     padding-right: 100px;
     padding-left: 100px;
@@ -371,6 +373,12 @@ footer {
 
 .style-cost {
     padding-top: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.style-cost strong {
+    color: lightgreen;
 }
 
 @media screen and (max-width: 1250px) {
