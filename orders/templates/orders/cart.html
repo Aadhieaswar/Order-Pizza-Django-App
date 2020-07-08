@@ -236,8 +236,17 @@ Cart
         {% for item in cart_items %}
         <div class="alert alert-warning" title="{{ item }}" >{{ item }}</div>
         {% endfor %}
-    {% endif %}
     </div> 
+    <div class="card-footer footer-card-content">
+    <div class="col float-left style-cost">
+        Total (includes +8% HST): ${{ price }}
+    </div>
+    <form action="#" method="post" class="col float-right">
+    <button type="submit" class="btn btn-primary float-right">Check Out</button>
+    </form>
+    </div>
+    {% endif %}
+
 </div>
 
 <script src="{% static 'orders/cart.js' %}"></script>

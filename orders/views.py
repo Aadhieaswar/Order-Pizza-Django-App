@@ -94,13 +94,20 @@ def cart(request):
 
     cart_items = []
 
-    person = request.user.id
+    totalCost = 0
+
+    person_id = request.user.id
 
     try: 
-        query = f"SELECT * FROM orders_cart WHERE customer_id = {person}"
+        query = f"SELECT * FROM orders_cart WHERE customer_id = {person_id}"
+        query1 = f"SELECT price FROM orders_cart WHERE customer_id = {person_id}"
 
         for items in Cart.objects.raw(query):
             cart_items.append(items)
+
+        for price in Cart.objects.raw(query1):
+            totalCost += price
+        
     except: 
         pass
 
@@ -113,6 +120,7 @@ def cart(request):
     'toppings': Menu['topping'],
     'sub_add': Menu['SubAdd'],
     'cart_items': cart_items,
+    'price': (totalCost * 1.08),
     }
 
     return render(request, "orders/cart.html", context)
@@ -227,5 +235,72 @@ def submit_order(request):
             except: 
                 messages.error(request, 'Please Submit a Valid Order!')
                 return redirect("cart")
+
+        # if loop to get and add subs to the cart table
+        elif (itemType == "Sub"):
+            try:
+                item = Sub.objects.values_list(f'{subSize}', flat=True).filter(Q(sub=subType))
+                sPrice = item[0]
+
+                if (subExtras != "none"):
+                    extra = SubAdditional.objects.values_list(f'{subSize}', flat=True).filter(Q(item=subExtras))
+                    sPrice += extra[0]
+                    subSize = subSize.capitalize()
+
+                    # add the item to the cart (with extras for the sub)
+                    sub = Cart(customer=request.user, item=f"{subType} Sub with {subExtras} - {subSize}", price=sPrice)
+                    sub.save()
+                else:
+                    subSize = subSize.capitalize()
+
+                    # add the item to the cart (without extras for the sub)
+                    sub = Cart(customer=request.user, item=f"{subType} Sub - {subSize}", price=sPrice)
+                    sub.save()
+            except:
+                messages.error(request, 'Please Submit a Valid Order!')
+                return redirect("cart")
+
+        # if loop to get or add pasta to the cart table
+        elif (itemType == "Pasta"):
+            try:
+                item = Pasta.objects.values_list('cost', flat=True).filter(Q(pasta=pastaType))
+                pasPrice = item[0]
+
+                # add the item to the cart
+                pasta = Cart(customer=request.user, item=f"{pastaType} Pasta", price=pasPrice)
+                pasta.save()
+            except:
+                messages.error(request, 'Please Submit a Valid Order!')
+                return redirect("cart")
+        
+        # if loop to get orr add salad to the cart table
+        elif (itemType == "Salad"):
+            try:
+                item = Salad.objects.values_list('cost', flat=True).filter(Q(salad=saladType))
+                salPrice = item[0]
+
+                # add the item to the cart
+                salad = Cart(customer=request.user, item=f"{saladType} (Salad)", price=salPrice)
+                salad.save()
+            except:
+                messages.error(request, 'Please Submit a Valid Order!')
+                return redirect("cart")
+
+        # if loop to get or add dinner platters to the cart table
+        elif (itemType == "DinnerPlatter"):
+            try:
+                item = DinnerPlatter.objects.values_list(f'{DPSize}', flat=True).filter(Q(platter=DPType))
+                DPPrice = item[0]
+                DPSize = DPSize.capitalize()
+
+                # add the item to the cart
+                platter = Cart(customer=request.user, item=f"{DPType} Platter - {DPSize}", price=DPPrice)
+                platter.save()
+            except:
+                messages.error(request, 'Please Submit a Valid Order!')
+                return redirect("cart")
+        # else loop as a layer of protection against the misuse of the HTML form
+        else:
+            return HttpResponse("ERROR 404 NOT FOUND")
 
     return redirect("cart")
