@@ -28,10 +28,8 @@ Menu = {
 def index(request):
 
     if request.session.get("user") is not None:
-        user = "Welcome " + request.session["user"] + "!"
         count = Cart.objects.filter(Q(customer=request.user)).count()
     else:
-        user = ""
         count = 0
 
     if (count == 0):
@@ -41,7 +39,6 @@ def index(request):
 
 
     context = {
-    'msg': user,
     'pizzas': Menu['pizza'],
     'subs': Menu['sub'],
     'pastas': Menu['pasta'],
@@ -68,6 +65,7 @@ def login_view(request):
             request.session["user"] = name
 
             login(request, user)
+            messages.info(request, f"Welcome {request.user}!", fail_silently=True)
             return HttpResponseRedirect(reverse("home"))
         else:
             messages.warning(request, 'Invalid Credentials!')
@@ -84,6 +82,7 @@ def signup_view(request):
         form = CreateUser(request.POST)
         if form.is_valid():
             form.save()
+            messages.info(request, f"Welcome {request.user}!", fail_silently=True)
             return redirect("home")
 
     context = {
@@ -113,9 +112,12 @@ def cart(request):
     person_id = request.user.id
 
     try:
+
         for items in Cart.objects.filter(Q(customer=request.user)):
-            count += 1
             cart_items.append(items)
+
+        for items in Cart.objects.values_list('qty', flat=True).filter(Q(customer=request.user)):
+            count += items
 
         for price in Cart.objects.values_list('price', flat=True).filter(Q(customer=request.user)):
             totalCost += price
@@ -154,6 +156,11 @@ def submit_order(request):
         # form input to get the item type
         itemType = request.POST["itemType"]
 
+        # form input to get quantity of the item
+        item_quantity = request.POST["item_quantity"] 
+        # have a decimal value of the item to perform operations 
+        decimal_quantity = Decimal(item_quantity)
+
         # form input for cheese pizza
         cheeseSize = request.POST["cheeseSize"]
         cheeseType = request.POST["cheeseType"]
@@ -190,28 +197,28 @@ def submit_order(request):
         if (itemType == "Cheese"):
             try:
                 item = Pizza.objects.values_list(f'{cheeseSize}', flat=True).filter(Q(pizza=itemType), Q(type=cheeseType))
-                cPrice = item[0]
+                cPrice = (item[0]  *  decimal_quantity)
                 cheeseSize = cheeseSize.capitalize()
 
                 # add item to the cart table 
-                cheese_pizza = Cart(customer=request.user, item=f"{cheeseType} {itemType} Pizza - {cheeseSize}", price=cPrice)
+                cheese_pizza = Cart(customer=request.user, item=f"{cheeseType} {itemType} Pizza - {cheeseSize}", price=cPrice, qty=item_quantity)
                 cheese_pizza.save()
             except:
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
         # if loop to get and add special pizza to the cart
         elif (itemType == "Special"):
             try:
                 item = Pizza.objects.values_list(f'{specialSize}', flat=True).filter(Q(pizza=itemType), Q(type=specialType))
-                sPrice = item[0]
+                sPrice = (item[0]  *  decimal_quantity)
                 specialSize = specialSize.capitalize()
                 
                 # add item to the cart table
-                special_pizza = Cart(customer=request.user, item=f"{specialType} {itemType} Pizza - {specialSize}", price=sPrice)
+                special_pizza = Cart(customer=request.user, item=f"{specialType} {itemType} Pizza - {specialSize}", price=sPrice, qty=item_quantity)
                 special_pizza.save()
             except:
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
         # if loop to get and add customized pizza to the cart
@@ -235,7 +242,7 @@ def submit_order(request):
                     pizza_topping = f"{i}-Toppings"
 
                 item = Pizza.objects.values_list(f'{pizzaSize}', flat=True).filter(Q(pizza=pizza_topping), Q(type=pizzaType))
-                pPrice = item[0]
+                pPrice = (item[0]  *  decimal_quantity) 
 
                 pizzaSize = pizzaSize.capitalize()
 
@@ -243,22 +250,22 @@ def submit_order(request):
 
                 # add item to the cart table
                 if (pizza_topping == "1-Topping"):
-                    custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]} - {pizzaSize}", price=pPrice)
+                    custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]} - {pizzaSize}", price=pPrice, qty=item_quantity)
                 elif (pizza_topping == "2-Toppings"):
-                    custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]} and {topArray[1]} - {pizzaSize}", price=pPrice)
+                    custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]} and {topArray[1]} - {pizzaSize}", price=pPrice, qty=item_quantity)
                 else:
-                    custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]}, {topArray[1]}, and {topArray[2]} - {pizzaSize}", price=pPrice)
+                    custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]}, {topArray[1]}, and {topArray[2]} - {pizzaSize}", price=pPrice, qty=item_quantity)
                 custom_pizza.save()
 
             except: 
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
         # if loop to get and add subs to the cart table
         elif (itemType == "Sub"):
             try:
                 item = Sub.objects.values_list(f'{subSize}', flat=True).filter(Q(sub=subType))
-                sPrice = item[0]
+                sPrice = (item[0]  *  decimal_quantity)
 
                 if (subExtras != "none"):
                     extra = SubAdditional.objects.values_list(f'{subSize}', flat=True).filter(Q(item=subExtras))
@@ -266,56 +273,56 @@ def submit_order(request):
                     subSize = subSize.capitalize()
 
                     # add the item to the cart (with extras for the sub)
-                    sub = Cart(customer=request.user, item=f"{subType} Sub with {subExtras} - {subSize}", price=sPrice)
+                    sub = Cart(customer=request.user, item=f"{subType} Sub with {subExtras} - {subSize}", price=sPrice, qty=item_quantity)
                     sub.save()
                 else:
                     subSize = subSize.capitalize()
 
                     # add the item to the cart (without extras for the sub)
-                    sub = Cart(customer=request.user, item=f"{subType} Sub - {subSize}", price=sPrice)
+                    sub = Cart(customer=request.user, item=f"{subType} Sub - {subSize}", price=sPrice, qty=item_quantity)
                     sub.save()
             except:
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
         # if loop to get or add pasta to the cart table
         elif (itemType == "Pasta"):
             try:
                 item = Pasta.objects.values_list('cost', flat=True).filter(Q(pasta=pastaType))
-                pasPrice = item[0]
+                pasPrice = (item[0]  *  decimal_quantity)
 
                 # add the item to the cart
-                pasta = Cart(customer=request.user, item=f"{pastaType} Pasta", price=pasPrice)
+                pasta = Cart(customer=request.user, item=f"{pastaType} Pasta", price=pasPrice, qty=item_quantity)
                 pasta.save()
             except:
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
         
         # if loop to get orr add salad to the cart table
         elif (itemType == "Salad"):
             try:
                 item = Salad.objects.values_list('cost', flat=True).filter(Q(salad=saladType))
-                salPrice = item[0]
+                salPrice = (item[0]  *  decimal_quantity)
 
                 # add the item to the cart
-                salad = Cart(customer=request.user, item=f"{saladType} (Salad)", price=salPrice)
+                salad = Cart(customer=request.user, item=f"{saladType} (Salad)", price=salPrice, qty=item_quantity)
                 salad.save()
             except:
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
         # if loop to get or add dinner platters to the cart table
         elif (itemType == "DinnerPlatter"):
             try:
                 item = DinnerPlatter.objects.values_list(f'{DPSize}', flat=True).filter(Q(platter=DPType))
-                DPPrice = item[0]
+                DPPrice = (item[0]  *  decimal_quantity)
                 DPSize = DPSize.capitalize()
 
                 # add the item to the cart
-                platter = Cart(customer=request.user, item=f"{DPType} Platter - {DPSize}", price=DPPrice)
+                platter = Cart(customer=request.user, item=f"{DPType} Platter - {DPSize}", price=DPPrice, qty=item_quantity)
                 platter.save()
             except:
-                messages.error(request, 'Please Submit a Valid Order!')
+                messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
         # else loop as a layer of protection against the misuse of the HTML form
@@ -330,5 +337,25 @@ def checkOut(request):
     if request.method == "POST":
         
         remove_items = Cart.objects.filter(Q(customer=request.user)).delete()
+        messages.success(request, "You Have Successfully Completed the Payment", fail_silently=True)
 
     return redirect("cart")
+
+@Authenticated_user
+def removeItem(request):
+
+    if request.method == "POST":
+
+        item_id = request.POST["item_id"]
+        try: 
+            remove = Cart.objects.filter(Q(customer=request.user), Q(id=item_id)).delete()
+            messages.success(request, "You have successfull removed the item from your cart", fail_silently=True)
+        except:
+            messages.error(request, "Unable to remove item", fail_silently=True)
+
+    return redirect("cart")
+
+# currently a sample for testing paypal
+def sample(request):
+
+    return render(request, "orders/checkout.html")

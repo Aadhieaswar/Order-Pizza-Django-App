@@ -72,21 +72,45 @@ footer {
     margin-top: 15px;
 }
 
-.link-white {
+.link-orange {
     float: right;
     font-weight: bold;
-    color: lightgreen;
+    color: orange;
     padding: 10px;
-    border: 2px solid lightgreen;
-    border-radius: 5px;
+    border: 2px solid orange;
+    border-radius: 4px;
     text-decoration: none;
     margin: 10px;
 }
 
-.link-white:hover {
+.username {
+    float: right;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px;
+    margin-top: 5px;
+    color: #f6800a;
+    font-family: "Lobster";
+}
+
+.link-orange:hover {
     color: #1d2124;
-    background-color: lightgreen;
+    background-color: orange;
     text-decoration: none;
+}
+
+.welcoming {
+    justify-content: center;
+    font-size: 40px;
+    color: orange;
+    font-family: "Lobster";
+}
+
+.table-align-items {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .title-lobster {
@@ -295,23 +319,28 @@ footer {
 
 .order-strip {
     width: 90%;
-    height: 35px;
     margin-left: 5%;
-    background-color: #1d2124;
-    display: inline-flex;
     font-size: 20px;
-    color: lightgreen;
-    border-radius: 3px;
     border: 2px solid #1d2124;
-    top: 0;
     margin-top: 20px;
+}
+
+.order-title {
+    color: orange;
+    font-family: "Lobster";
+    font-size: 30px;
+}
+
+.cart-title {
+    color: #f6800a;
+    font-family: "Lobster";
+    font-size: 30px;
 }
 
 .item-order-form {
     justify-content: center;
     text-align: center;
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     float: center;
@@ -334,13 +363,6 @@ footer {
     margin-bottom: 15px;
 }
 
-.sel-item-warn {
-    font-weight: bold;
-    padding: 5px;
-    margin-top: -10px;
-    font-size: 15px;
-}
-
 .options {
     display: none;
     justify-content: center;
@@ -353,13 +375,15 @@ footer {
 
 .item-display {
     padding: 10px;
-    background-color: lightgreen;
+    background-color: white;
     margin-bottom: -15px;
-    border: 2px solid #1d2124;
+    border: 2px solid #f6800a;
+    color: #f6800a;
+    font-family: "Lobster";
     font-weight: bold;
     padding-right: 100px;
     padding-left: 100px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .warning-message {
@@ -369,6 +393,7 @@ footer {
 
 .footer-card-content {
     display: inline-flex;
+    width: 100%;
 }
 
 .style-cost {
@@ -379,6 +404,49 @@ footer {
 
 .style-cost strong {
     color: lightgreen;
+}
+
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #721c24;
+}
+
+.alert-cus {
+    margin-bottom: -20px;
+}
+
+.inline-flex {
+    display: inline-flex;
+    width: 100%;
+}
+
+.none-display {
+    display: none;
+}
+
+.remove-button {
+    color: green;
+    font-size: 25px;
+    font-weight: bolder;
+    background-color: none;
+    float: right;
+}
+
+.remove-button:hover {
+    color: darkred;
+}
+
+.qty-form {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.field-8 {
+    width: 8%;
+    margin-left: 46%;
+    margin-right: 46%;
 }
 
 @media screen and (max-width: 1250px) {

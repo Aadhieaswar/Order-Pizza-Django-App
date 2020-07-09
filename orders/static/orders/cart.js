@@ -8,6 +8,10 @@ disappear = () => {
     })
 }
 
+showQty = () => {
+    document.querySelector('#qty').style.display = 'block'
+}
+
 document.querySelector('#order-item').onclick = () => {
     if (form_select.value === 'default') {
         warn.style.display = 'block'
@@ -16,12 +20,13 @@ document.querySelector('#order-item').onclick = () => {
         warn.style.display = 'none'
         const result = document.createElement('div')
         result.innerHTML = form_select.options[form_select.selectedIndex].text
-        result.className += 'card center item-display'
+        result.className += 'card center item-display box-shadow'
         form_select.style.display = 'none'
         document.querySelector('#order-item').style.display = 'none'
         document.querySelector('#item-order-title').innerHTML = 'Now Ordering...'
         div.append(result)
         disappear()
+        showQty()
     }
 
     if (form_select.value === 'Pizza') {

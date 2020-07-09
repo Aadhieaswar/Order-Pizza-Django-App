@@ -1,0 +1,78 @@
+{% extends "orders/base.html" %}
+
+{% load static %}
+
+<!-- title -->
+{% block title %} 
+
+Pinocchio's Pizza 
+
+{% endblock %}
+
+{% block body %}
+
+<!-- NavBar -->
+<div class="head">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col">
+            <img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
+            <h1 class="title-lobster">Pinocchio's Pizza</h1>
+        </div>
+       
+        <div class="col" style="margin-top: 10px;">
+            <a class="link-orange" href="{% url 'home' %}">Home</a>
+            <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+            <div class="username">{{ request.user }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- content -->
+<div class="" style="width: 90%; justify-content: center; margin-left: 5%; margin-top: 20px;">
+    <div class="border-dark card center">
+        <div class="card-header bg-dark bold-30" style="color: white;">CheckOut</div>
+
+        <div class="card-body" id="paypal-button-container"></div>
+    </div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AWGcdm29xVfK6wsp_liuBhbekjdjMQFiOdvKZ9gPJAB5J2_Lo1BFv6Ck71BaxUJIwV7EP4WR-wTVoCcZ&currency=USD&disable-funding=credit"></script>
+
+<script>
+
+        var total = {{ price }}
+
+        paypal.Buttons({
+
+            style: {
+                color:  'blue',
+                shape:  'rect',
+                label:  'pay',
+                height: 40
+            },
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+</script>
+
+
+{% endblock %}

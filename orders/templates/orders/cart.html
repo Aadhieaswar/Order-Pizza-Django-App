@@ -20,235 +20,256 @@ Cart
         </div>
        
         <div class="col" style="margin-top: 10px;">
-
-            <a class="link-white" href="{% url 'home' %}">Home</a>
-            <a class="link-white" href="{% url '_logout' %}">LogOut</a>
-
+            <a class="link-orange" href="{% url 'home' %}">Home</a>
+            <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+            <div class="username">{{ request.user }}</div>
         </div>
     </div>
 </div>
 
 <!-- Content -->
+{% if messages %}
+    <div class="card-body center bold-30">
+        {% for item in messages %}
+        <div class="alert alert-{{ item.tags }} alert-cus">{{ item }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
 
-<div class="row order-strip box-shadow">
-    <div class="col">
+<div class="card box-shadow order-strip border-warning">
+    <div class="card-header bg-light bold-30 center order-title">
         &nbsp Order From Pinocchio's Pizza
     </div>
+
+    <form action="{% url 'submit_order' %}" class="card-body item-order-form" method="POST">
+        {% csrf_token %}
+        <div class="bold-30" id="item-order-title" style="margin-top: 5px;"> Choose Item to Order </div>
+        <div class="order-input-container" id="itemType-container"></div>
+        <div class="order-input-container">
+            <select class="custom-select item-input" id="select-items" type="text" name="itemType">
+                <option value="default">Choose item...</option>
+                <option value="Cheese">Cheese Pizza</option>
+                <option title="Pizza" value="Pizza">Make your own Pizza</option>
+                <option value="Special">This Week's Pizza Special</option>
+                <option title="Sub" value="Sub">Sub</option>
+                <option title="Pasta" value="Pasta">Pasta</option>
+                <option title="Salad" value="Salad">Salad</option>
+                <option title="Dinner Platter" value="DinnerPlatter">Dinner Platter</option>
+            </select>
+            <button type="button" class="btn btn-success item-button" id="order-item">Order</button>
+        </div>
+        <div class="center invalid-feedback sel-item-warn" id="warn">
+            &#9888 Please choose an item to order
+        </div>
+
+        <!-- Input type to get quantity --> 
+        <div class="center options qty-form" id="qty">
+            <div class="bold-30">Quantity</div>
+            <input class="form-control field-8" type="number" min="1" max="1000" name="item_quantity" value="1">
+        </div>
+
+        <!-- Pizza Form -->
+        <div class="pizza-options options">
+            <div class="bold-30" style="margin-bottom: 10px;"> Customize Your Pizza! </div>
+
+            <select class="custom-select field-40" style="margin-bottom: 10px;" name="pizzaType">
+                    <option value="none">Pizza Type...</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Sicilian">Sicilian</option>
+            </select>
+
+            <select class="custom-select field-40" style="margin-bottom: 10px;" name="pizzaSize">
+                    <option value="none">Pizza Size...</option>
+                    <option value="small">Small</option>
+                    <option value="large">Large</option>
+            </select> 
+
+            <p>
+                <select class="custom-select field-40" name="topping1">
+                    <option value="none">Topping-1</option>
+                    {% for top in toppings %}
+                    <option title="{{ top }}" value="{{ top }}">{{ top }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="custom-select field-40" name="topping2">
+                    <option value="none">Toping-2</option>
+                    {% for top in toppings %}
+                    <option title="{{ top }}" value="{{ top }}">{{ top }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="custom-select field-40" name="topping3">
+                    <option value="none">Topping-3</option>
+                    {% for top in toppings %}
+                    <option title="{{ top }}" value="{{ top }}">{{ top }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <button type="submit" class="btn btn-success">Add to Cart</button>
+        </div>
+        <!-- Special Pizza Form -->
+        <div class="special-options options">
+
+            <div class="bold-30" style="margin-bottom: 10px;"> Choose the Size of your Special Pizza </div>
+
+            <p>
+                <select class="custom-select field-40" name="specialType">
+                    <option value="none">Pizza Type...</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Sicilian">Sicilian</option>
+                </select>
+                <select class="custom-select field-40" name="specialSize">
+                    <option value="none">Pizza Size...</option>
+                    <option value="small">Small</option>
+                    <option value="large">Large</option>
+                </select>
+            </p>
+            <button class="btn btn-success" type="submit">Add to Cart</button>
+        </div>
+        <!-- Cheese Pizza Form -->
+        <div class="cheese-options options">
+
+            <div class="bold-30" style="margin-bottom: 10px;"> Choose the Size of your Cheese Pizza </div>
+
+            <p>
+                <select class="custom-select field-40" name="cheeseType">
+                    <option value="none">Pizza Type...</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Sicilian">Sicilian</option>
+                </select>
+                <select class="custom-select field-40" name="cheeseSize">
+                    <option value="none">Pizza Size...</option>
+                    <option value="small">Small</option>
+                    <option value="large">Large</option>
+                </select>
+            </p>
+            <button class="btn btn-success" type="submit">Add to Cart</button>
+        </div>
+        <!-- Sub Form -->
+        <div class="sub-options options">
+
+            <div class="bold-30" style="margin-bottom: 10px;"> Customize Your Sub! </div>
+
+            <p>
+                <select class="custom-select field-40" name="subType">
+                    <option value="none">Sub Type...</option>
+                    {% for sub in subs %}
+                    <option value="{{ sub.sub }}">{{ sub.sub }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="custom-select field-40" name="subSize">
+                    <option value="none">Sub Size...</option>
+                    <option value="small">Small</option>
+                    <option value="large">Large</option>
+                </select>
+
+                <select class="custom-select field-40" name="subExtras">
+                    <option value="none">Extras...</option>
+                    {% for add in sub_add %}
+                    <option value="{{ add.item }}">{{ add.item }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <button type="submit" class="btn btn-success">Add to Cart</button>
+        </div>
+        <!-- Pasta Form -->
+        <div class="pasta-options options">
+
+            <div class="bold-30" style="margin-bottom: 10px;"> Choose the Pasta of your choice! </div>
+
+            <p>
+                <select class="custom-select field-40" name="pastaType">
+                    <option value="none">Pasta Type...</option>
+                    {% for pasta in pastas %}
+                    <option value="{{ pasta.pasta }}">{{ pasta.pasta }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <button class="btn btn-success" type="submit">Add to Cart</button>
+        </div>
+        <!-- Salad Form -->
+        <div class="salad-options options">
+            
+            <div class="bold-30" style="margin-bottom: 10px;"> Choose the Salad your heart desires! </div>
+            
+            <p>
+                <select class="custom-select field-40" name="saladType">
+                    <option value="none">Salad Type...</option>
+                    {% for salad in salads %}
+                    <option value="{{ salad.salad }}">{{ salad.salad }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <button class="btn btn-success" type="submit">Add to Cart</button>
+        </div>
+        <!-- Dinner Platter Form -->
+        <div class="DP-options options">
+            
+            <div class="bold-30" style="margin-bottom: 10px;"> Choose the Dinner Platter you enjoy! </div>
+            
+            <p>
+                <select class="custom-select field-40" name="DPType"> 
+                    <option value="none">Platter Type...</option>
+                    {% for platter in dinner_platters %}
+                    <option value="{{ platter.platter }}">{{ platter.platter }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="custom-select field-40" name="DPSize">
+                    <option value="none">Platter Size...</option>
+                    <option value="small">Small</option>
+                    <option value="large">Large</option>
+                </select>
+            </p>
+            <button class="btn btn-success" type="submit">Add to Cart</button>
+        </div>
+    </form>
 </div>
 
-<form action="{% url 'submit_order' %}" class="card item-order-form box-shadow" method="post">
-    {% csrf_token %}
-    <div class="bold-30" id="item-order-title" style="margin-top: 5px;"> Choose item to order </div>
-    <div class="order-input-container" id="itemType-container">
-    </div>
-    <div class="order-input-container">
-        <select class="custom-select item-input" id="select-items" type="text" name="itemType">
-            <option value="default">Choose item...</option>
-            <option value="Cheese">Cheese Pizza</option>
-            <option title="Pizza" value="Pizza">Make your own Pizza</option>
-            <option value="Special">This Week's Pizza Special</option>
-            <option title="Sub" value="Sub">Sub</option>
-            <option title="Pasta" value="Pasta">Pasta</option>
-            <option title="Salad" value="Salad">Salad</option>
-            <option title="Dinner Platter" value="DinnerPlatter">Dinner Platter</option>
-        </select>
-        <button type="button" class="btn btn-success item-button" id="order-item">Order</button>
-    </div>
-    <div class="center invalid-feedback sel-item-warn" id="warn">
-        &#9888 Please choose an item to order
-    </div>
-
-    {% if messages %}
-        {% for message in messages %}
-    <div class="center invalid-feedback sel-item-warn warning-message disappear">
-        &#9888 {{ message }}
-    </div>
-        {% endfor %}
-    {% endif %}
-
-    <!-- Pizza Form -->
-    <div class="pizza-options options">
-        <div class="bold-30" style="margin-bottom: 10px;"> Customize Your Pizza! </div>
-
-        <select class="custom-select field-40" style="margin-bottom: 10px;" name="pizzaType">
-                <option value="none">Pizza Type...</option>
-                <option value="Regular">Regular</option>
-                <option value="Sicilian">Sicilian</option>
-        </select>
-
-        <select class="custom-select field-40" style="margin-bottom: 10px;" name="pizzaSize">
-                <option value="none">Pizza Size...</option>
-                <option value="small">Small</option>
-                <option value="large">Large</option>
-        </select> 
-
-        <p>
-            <select class="custom-select field-40" name="topping1">
-                <option value="none">Topping-1</option>
-                {% for top in toppings %}
-                <option title="{{ top }}" value="{{ top }}">{{ top }}</option>
-                {% endfor %}
-            </select>
-
-            <select class="custom-select field-40" name="topping2">
-                <option value="none">Toping-2</option>
-                {% for top in toppings %}
-                <option title="{{ top }}" value="{{ top }}">{{ top }}</option>
-                {% endfor %}
-            </select>
-
-            <select class="custom-select field-40" name="topping3">
-                <option value="none">Topping-3</option>
-                {% for top in toppings %}
-                <option title="{{ top }}" value="{{ top }}">{{ top }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <button type="submit" class="btn btn-success">Add to Cart</button>
-    </div>
-    <!-- Special Pizza Form -->
-    <div class="special-options options">
-
-        <div class="bold-30" style="margin-bottom: 10px;"> Choose the Size of your Special Pizza </div>
-
-        <p>
-            <select class="custom-select field-40" name="specialType">
-                <option value="none">Pizza Type...</option>
-                <option value="Regular">Regular</option>
-                <option value="Sicilian">Sicilian</option>
-            </select>
-            <select class="custom-select field-40" name="specialSize">
-                <option value="none">Pizza Size...</option>
-                <option value="small">Small</option>
-                <option value="large">Large</option>
-            </select>
-        </p>
-        <button class="btn btn-success" type="submit">Add to Cart</button>
-    </div>
-    <!-- Cheese Pizza Form -->
-    <div class="cheese-options options">
-
-        <div class="bold-30" style="margin-bottom: 10px;"> Choose the Size of your Cheese Pizza </div>
-
-        <p>
-            <select class="custom-select field-40" name="cheeseType">
-                <option value="none">Pizza Type...</option>
-                <option value="Regular">Regular</option>
-                <option value="Sicilian">Sicilian</option>
-            </select>
-            <select class="custom-select field-40" name="cheeseSize">
-                <option value="none">Pizza Size...</option>
-                <option value="small">Small</option>
-                <option value="large">Large</option>
-            </select>
-        </p>
-        <button class="btn btn-success" type="submit">Add to Cart</button>
-    </div>
-    <!-- Sub Form -->
-    <div class="sub-options options">
-
-        <div class="bold-30" style="margin-bottom: 10px;"> Customize Your Sub! </div>
-
-        <p>
-            <select class="custom-select field-40" name="subType">
-                <option value="none">Sub Type...</option>
-                {% for sub in subs %}
-                <option value="{{ sub.sub }}">{{ sub.sub }}</option>
-                {% endfor %}
-            </select>
-
-            <select class="custom-select field-40" name="subSize">
-                <option value="none">Sub Size...</option>
-                <option value="small">Small</option>
-                <option value="large">Large</option>
-            </select>
-
-            <select class="custom-select field-40" name="subExtras">
-                <option value="none">Extras...</option>
-                {% for add in sub_add %}
-                <option value="{{ add.item }}">{{ add.item }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <button type="submit" class="btn btn-success">Add to Cart</button>
-    </div>
-    <!-- Pasta Form -->
-    <div class="pasta-options options">
-
-        <div class="bold-30" style="margin-bottom: 10px;"> Choose the Pasta of your choice! </div>
-
-        <p>
-            <select class="custom-select field-40" name="pastaType">
-                <option value="none">Pasta Type...</option>
-                {% for pasta in pastas %}
-                <option value="{{ pasta.pasta }}">{{ pasta.pasta }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <button class="btn btn-success" type="submit">Add to Cart</button>
-    </div>
-    <!-- Salad Form -->
-    <div class="salad-options options">
-        
-        <div class="bold-30" style="margin-bottom: 10px;"> Choose the Salad your heart desires! </div>
-        
-        <p>
-            <select class="custom-select field-40" name="saladType">
-                <option value="none">Salad Type...</option>
-                {% for salad in salads %}
-                <option value="{{ salad.salad }}">{{ salad.salad }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <button class="btn btn-success" type="submit">Add to Cart</button>
-    </div>
-    <!-- Dinner Platter Form -->
-    <div class="DP-options options">
-        
-        <div class="bold-30" style="margin-bottom: 10px;"> Choose the Dinner Platter you enjoy! </div>
-        
-        <p>
-            <select class="custom-select field-40" name="DPType"> 
-                <option value="none">Platter Type...</option>
-                {% for platter in dinner_platters %}
-                <option value="{{ platter.platter }}">{{ platter.platter }}</option>
-                {% endfor %}
-            </select>
-
-            <select class="custom-select field-40" name="DPSize">
-                <option value="none">Platter Size...</option>
-                <option value="small">Small</option>
-                <option value="large">Large</option>
-            </select>
-        </p>
-        <button class="btn btn-success" type="submit">Add to Cart</button>
-    </div>
-</form>
-
-<div class="card cart-container box-shadow">
-    <div class="card-header bold-30 bg-dark" style="color: lightgreen;">
+<div class="card border-light cart-container box-shadow">
+    <div class="card-header bold-30 bg-dark cart-title">
 
         {{ request.user }}'s Cart
 
     </div>
+
+    {% if not cart_items %}
     <div class="card-body body-container">
+        <div class="alert alert-info center bold-30">💡 To add items to the cart, use the form above</div>
+    </div> 
+    {% endif %}
+
     {% if cart_items %}
+    <div class="card-body body-container">
         {% for item in cart_items %}
-        <div class="alert alert-success" title="{{ item }}" >{{ item }}</div>
+        <div class="alert alert-success inline-flex col" title="{{ item }}">
+        {{ item }}
+        
+        <!-- form for removing item from the cart when the user needs -->
+        <form action="{% url 'remove_item' %}" method="POST" class="justify-content-center col">
+        {% csrf_token %}
+        <input type="text" class="none-display" value="{{ item.id }}" name="item_id">
+        <button type="submit" class="btn remove-button close" title="click to remove item from the cart">&times;</button>
+        </form>
+
+        </div>
         {% endfor %}
     </div> 
-    <div class="card-footer footer-card-content bg-dark">
-    <div class="col center style-cost">
-        Total (includes +8% HST): <strong class="bold-30"> ${{ price }} </strong>
-    </div>
-    <div class="col center style-cost">
-        Total Items: <strong class="bold-30"> {{ count }} </strong>
-    </div>
+    <div class="card-footer footer-card-content bg-dark cart-footer">
 
-    <form action="{% url 'check_out' %}" method="post" class="col float-right">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary float-right">Check Out</button>
-    </form>
+        <div class="col center style-cost">
+            Total (includes +8% HST): <strong class="bold-30"> ${{ price }} </strong>
+        </div>
+        <div class="col center style-cost">
+            Total Items: <strong class="bold-30"> {{ count }} </strong>
+        </div>
+
+        <form action="{% url 'check_out' %}" method="POST" class="col float-right">
+        {% csrf_token %}
+            <button type="submit" class="btn btn-primary float-right">Check Out</button>
+        </form>
     
     </div>
     {% endif %}
