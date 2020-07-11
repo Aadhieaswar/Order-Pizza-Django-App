@@ -14,8 +14,7 @@ from .forms import CreateUser
 from .decorators import Unauthenticated_user, Authenticated_user
 from .models import *
 
-# Create your views here.
-
+# global vars
 Menu = {
 'pizza': Pizza.objects.all(),
 'salad': Salad.objects.all(),
@@ -25,6 +24,8 @@ Menu = {
 'topping': Topping.objects.all(),
 'SubAdd': SubAdditional.objects.all(),
 }
+
+# Create your views here.
 
 def index(request):
 
