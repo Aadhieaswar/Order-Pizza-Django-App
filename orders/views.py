@@ -401,8 +401,10 @@ def completed(request):
         # ordered items to show up on the console
         cart_items = json.loads(request.body)
 
-        print('customer', request.user)
+        print("########################")
+        print('customer:', request.user)
         print('payment_for:', cart_items)
+        print("########################")
 
         return JsonResponse("Payment Successful", safe=False)
 
