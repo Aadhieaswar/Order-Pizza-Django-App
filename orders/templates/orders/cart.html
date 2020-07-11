@@ -1,4 +1,4 @@
-{% extends "orders/base.html" %}
+{% extends "orders/base.html" %} 
 
 {% load static %}
 
@@ -7,7 +7,7 @@
 
 Cart 
 
-{% endblock %}
+{% endblock %} 
 
 {% block body %}
 
@@ -18,7 +18,7 @@ Cart
             <img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
             <h1 class="title-lobster">Pinocchio's Pizza</h1>
         </div>
-       
+
         <div class="col" style="margin-top: 10px;">
             <a class="link-orange" href="{% url 'home' %}">Home</a>
             <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
@@ -29,15 +29,15 @@ Cart
 
 <!-- Content -->
 {% if messages %}
-    <div class="card-body center bold-30">
-        {% for item in messages %}
-        <div class="alert alert-{{ item.tags }} alert-cus">{{ item }}</div>
-        {% endfor %}
-    </div>
+<div class="card-body center bold-30">
+    {% for item in messages %}
+    <div class="alert alert-{{ item.tags }} alert-cus">{{ item }}</div>
+    {% endfor %}
+</div>
 {% endif %}
 
 <div class="card box-shadow order-strip border-warning">
-    <div class="card-header bg-light bold-30 center order-title">
+    <div class="card-header bg-light bold-30 center order-title border-warning">
         &nbsp Order From Pinocchio's Pizza
     </div>
 
@@ -62,7 +62,7 @@ Cart
             &#9888 Please choose an item to order
         </div>
 
-        <!-- Input type to get quantity --> 
+        <!-- Input type to get quantity -->
         <div class="center options qty-form" id="qty">
             <div class="bold-30">Quantity</div>
             <input class="form-control field-8" type="number" min="1" max="1000" name="item_quantity" value="1">
@@ -82,7 +82,7 @@ Cart
                     <option value="none">Pizza Size...</option>
                     <option value="small">Small</option>
                     <option value="large">Large</option>
-            </select> 
+            </select>
 
             <p>
                 <select class="custom-select field-40" name="topping1">
@@ -191,9 +191,9 @@ Cart
         </div>
         <!-- Salad Form -->
         <div class="salad-options options">
-            
+
             <div class="bold-30" style="margin-bottom: 10px;"> Choose the Salad your heart desires! </div>
-            
+
             <p>
                 <select class="custom-select field-40" name="saladType">
                     <option value="none">Salad Type...</option>
@@ -206,9 +206,9 @@ Cart
         </div>
         <!-- Dinner Platter Form -->
         <div class="DP-options options">
-            
+
             <div class="bold-30" style="margin-bottom: 10px;"> Choose the Dinner Platter you enjoy! </div>
-            
+
             <p>
                 <select class="custom-select field-40" name="DPType"> 
                     <option value="none">Platter Type...</option>
@@ -238,25 +238,23 @@ Cart
     {% if not cart_items %}
     <div class="card-body body-container">
         <div class="alert alert-info center bold-30">💡 To add items to the cart, use the form above</div>
-    </div> 
-    {% endif %}
-
-    {% if cart_items %}
+    </div>
+    {% endif %} {% if cart_items %}
     <div class="card-body body-container">
         {% for item in cart_items %}
         <div class="alert alert-success inline-flex col" title="{{ item }}">
-        {{ item }}
-        
-        <!-- form for removing item from the cart when the user needs -->
-        <form action="{% url 'remove_item' %}" method="POST" class="justify-content-center col">
-        {% csrf_token %}
-        <input type="text" class="none-display" value="{{ item.id }}" name="item_id">
-        <button type="submit" class="btn remove-button close" title="click to remove item from the cart">&times;</button>
-        </form>
+            {{ item }}
+
+            <!-- form for removing item from the cart when the user needs -->
+            <form action="{% url 'remove_item' %}" method="POST" class="justify-content-center col">
+                {% csrf_token %}
+                <input type="number" class="display-none" value="{{ item.id }}" name="item_id">
+                <button type="submit" class="btn remove-button close" title="click to remove item from the cart">&times;</button>
+            </form>
 
         </div>
         {% endfor %}
-    </div> 
+    </div>
     <div class="card-footer footer-card-content bg-dark cart-footer">
 
         <div class="col center style-cost">
@@ -267,10 +265,10 @@ Cart
         </div>
 
         <form action="{% url 'check_out' %}" method="POST" class="col float-right">
-        {% csrf_token %}
+            {% csrf_token %}
             <button type="submit" class="btn btn-primary float-right">Check Out</button>
         </form>
-    
+
     </div>
     {% endif %}
 

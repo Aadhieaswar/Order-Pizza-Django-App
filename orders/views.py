@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.db import connection
 
+import json
 from decimal import *
 
 from .forms import CreateUser
@@ -112,7 +113,6 @@ def cart(request):
     person_id = request.user.id
 
     try:
-
         for items in Cart.objects.filter(Q(customer=request.user)):
             cart_items.append(items)
 
@@ -335,9 +335,34 @@ def submit_order(request):
 def checkOut(request):
 
     if request.method == "POST":
+
+        payment = 0
+
+        receipt_items = []
         
-        remove_items = Cart.objects.filter(Q(customer=request.user)).delete()
-        messages.success(request, "You Have Successfully Completed the Payment", fail_silently=True)
+        objects = Cart.objects.filter(Q(customer=request.user))
+
+        for price in Cart.objects.values_list('price', flat=True).filter(Q(customer=request.user)):
+            payment += price
+
+        # to display HST in the html file
+        interest = (payment * Decimal(0.08))
+        interest = Decimal("%.2f" % interest)
+
+        # add the interest to the total price
+        payment += interest
+
+        # storing the items of the order in an array
+        for item in objects:
+            receipt_items.append(item)
+
+        context = {
+            'receipt': receipt_items,
+            'payment': payment,
+            'interest': interest,
+        }
+
+        return render(request, "orders/checkout.html", context)
 
     return redirect("cart")
 
@@ -355,7 +380,30 @@ def removeItem(request):
 
     return redirect("cart")
 
-# currently a sample for testing paypal
-def sample(request):
+@Authenticated_user
+def completed(request):
 
-    return render(request, "orders/checkout.html")
+    if request.method == 'POST':
+
+        objects = Cart.objects.filter(Q(customer=request.user))
+        
+        order = Order(recipient=request.user)
+        order.save()
+
+        # creates a order for the customer
+        for item in objects:
+            order.items.add(item)
+            order.save()
+        
+        # removes the items from the cart as they have been paid for 
+        remove_items = objects.delete()
+
+        # ordered items to show up on the console
+        cart_items = json.loads(request.body)
+
+        print('customer', request.user)
+        print('payment_for:', cart_items)
+
+        return JsonResponse("Payment Successful", safe=False)
+
+    return HttpResponse("Forbidden!")

@@ -1,4 +1,4 @@
-{% extends "orders/base.html" %}
+{% extends "orders/base.html" %} 
 
 {% load static %}
 
@@ -7,7 +7,7 @@
 
 Pinocchio's Pizza 
 
-{% endblock %}
+{% endblock %} 
 
 {% block body %}
 
@@ -18,7 +18,7 @@ Pinocchio's Pizza
             <img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
             <h1 class="title-lobster">Pinocchio's Pizza</h1>
         </div>
-       
+
         <div class="col" style="margin-top: 10px;">
             <a class="link-orange" href="{% url 'home' %}">Home</a>
             <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
@@ -28,11 +28,63 @@ Pinocchio's Pizza
 </div>
 
 <!-- content -->
-<div class="" style="width: 90%; justify-content: center; margin-left: 5%; margin-top: 20px;">
-    <div class="border-dark card center">
-        <div class="card-header bg-dark bold-30" style="color: white;">CheckOut</div>
+<div class="style-card">
+    <div class="card border-dark bg-light">
+        <div class="card-header border-dark center bold-30 receipt-title">
+            Your Receipt
+        </div>
+        <div class="card-body border-dark center justify-content-center receipt-table">
+            <table class="receipt-table">
+                <tr class="receipt-head">
+                    <th class="float-left">
+                        <h5>Item</h5>
+                    </th>
+                    <th>
+                        <h5 class="center">Item Qty</h5>
+                    </th>
+                    <th class="float-right">
+                        <h5>Price</h5>
+                    </th>
+                </tr>
+                {% for item in receipt %}
+                <tr class="receipt-row">
+                    <th class="float-left width-40">
+                        {{ item.item }}
+                    </th>
+                    <th class="center">
+                        {{ item.qty }} 
+                    </th>
+                    <th class="float-right">
+                        ${{ item.price }}
+                    </th>
+                </tr>
+                {% endfor %}
+                <tr class="receipt-row">
+                    <th class="float-left">HST (+8%): </th> 
+                    <th></th>
+                    <th class="float-right">+ ${{ interest }}</th>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer border-dark">
+            <div class="float-right">
+            Total Purchase: <strong>${{ payment }}</strong>
+            </div>
+        </div>
+    </div>
 
+    <div class="center">
         <div class="card-body" id="paypal-button-container"></div>
+    </div>
+    
+    <div class="center justify-content-center display-none bold-30" id="payment-message">
+        <h4 class="center">Thank You for Shopping with Us</h4>
+        <h5 class="center">Hope You Have a Wonderful Meal!</h5>
+    </div>
+
+    <div class="center display-none" id="after-payment">
+        <a href="{% url 'home' %}" class="btn btn-primary btn-block cus-btn">Go Back Home</a>
+        <a href="{% url 'cart' %}" class="btn btn-info btn-block cus-btn">Order More From Us</a>
     </div>
 </div>
 
@@ -40,38 +92,87 @@ Pinocchio's Pizza
 
 <script>
 
-        var total = {{ price }}
+    let items_id = []
 
-        paypal.Buttons({
+    {% for item in receipt %}
+    items_id.push({{ item.id }})
+    {% endfor %}
 
-            style: {
-                color:  'blue',
-                shape:  'rect',
-                label:  'pay',
-                height: 40
-            },
+    console.log(items_id)
 
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: total
-                        }
-                    }]
-                });
-            },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                });
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    var total = {{ payment }}
+    var productID = 
+
+    completeOrder = () => {
+        var url = "{% url 'complete' %}"
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content_type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'Items_Ids': items_id})
+        })
+
+        // display redirect urls after payment
+        const element = document.querySelector('#after-payment')
+        element.style.display = 'inline-flex'
+        element.style.width = '100%'
+
+        // display 'thank you' messgaes after the payment 
+        const message = document.querySelector('#payment-message')
+        message.style.display = 'block' 
+    }
+
+    paypal.Buttons({
+
+        style: {
+            color: 'blue',
+            shape: 'rect',
+            label: 'pay',
+            height: 40
+        },
+
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: total,
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer
+                completeOrder()
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            });
+        }
 
 
-        }).render('#paypal-button-container');
+    }).render('#paypal-button-container');
 </script>
 
 

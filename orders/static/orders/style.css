@@ -297,7 +297,8 @@ footer {
     margin-top: 50px;
     margin-left: 5%;
     border: 2px solid #1d2124;
-    min-height: 400px;
+    max-height: 500px;
+    min-height: 100px;
     margin-bottom: 50px;
 }
 
@@ -421,10 +422,6 @@ footer {
     width: 100%;
 }
 
-.none-display {
-    display: none;
-}
-
 .remove-button {
     color: green;
     font-size: 25px;
@@ -447,6 +444,40 @@ footer {
     width: 8%;
     margin-left: 46%;
     margin-right: 46%;
+}
+
+.receipt-head {
+    border-bottom: 1px solid lightgrey;
+}
+
+.receipt-table {
+    width: 100%;
+    justify-content: center;
+}
+
+.receipt-row {
+    height: 30px;
+}
+
+.width-40 {
+    width: 40%;
+}
+
+.style-card {
+    width: 90%;
+    justify-content: center;
+    margin-left: 5%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.cus-btn {
+    width: 50%;
+    margin: 10px;
+}
+
+.display-none {
+    display: none;
 }
 
 @media screen and (max-width: 1250px) {

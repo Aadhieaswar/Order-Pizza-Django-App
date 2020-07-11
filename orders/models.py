@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# choice vars
+status_choices = (
+    ('Pending', 'Pending'),
+    ('Completed', 'Completed')
+)
+
 # Create your models here.
 
 class Pizza(models.Model):
@@ -62,3 +68,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.qty} order(s) of {self.item} - ${self.price}"
+
+class Order(models.Model):
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipient")
+    items = models.ManyToManyField(Cart)
+    status = models.CharField(max_length=10, choices=status_choices, default="Pending")
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order Created: {self.created}, Status: {self.status}"
