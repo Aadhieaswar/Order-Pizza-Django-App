@@ -13,3 +13,4 @@ admin.site.register(DinnerPlatter)
 admin.site.register(SubAdditional)
 admin.site.register(Cart)
 admin.site.register(Order)
+
