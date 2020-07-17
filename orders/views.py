@@ -158,8 +158,8 @@ def submit_order(request):
         itemType = request.POST["itemType"]
 
         # form input to get quantity of the item
-        item_quantity = request.POST["item_quantity"] 
-        # have a decimal value of the item to perform operations 
+        item_quantity = request.POST["item_quantity"]
+        # have a decimal value of the item to perform operations
         decimal_quantity = Decimal(item_quantity)
 
         # form input for cheese pizza
@@ -201,7 +201,7 @@ def submit_order(request):
                 cPrice = (item[0]  *  decimal_quantity)
                 cheeseSize = cheeseSize.capitalize()
 
-                # add item to the cart table 
+                # add item to the cart table
                 cheese_pizza = Cart(customer=request.user, item=f"{cheeseType} {itemType} Pizza - {cheeseSize}", price=cPrice, qty=item_quantity)
                 cheese_pizza.save()
             except:
@@ -214,7 +214,7 @@ def submit_order(request):
                 item = Pizza.objects.values_list(f'{specialSize}', flat=True).filter(Q(pizza=itemType), Q(type=specialType))
                 sPrice = (item[0]  *  decimal_quantity)
                 specialSize = specialSize.capitalize()
-                
+
                 # add item to the cart table
                 special_pizza = Cart(customer=request.user, item=f"{specialType} {itemType} Pizza - {specialSize}", price=sPrice, qty=item_quantity)
                 special_pizza.save()
@@ -223,11 +223,11 @@ def submit_order(request):
                 return redirect("cart")
 
         # if loop to get and add customized pizza to the cart
-        elif (itemType == "Pizza"): 
+        elif (itemType == "Pizza"):
             try:
                 i = 0
                 topArray = [topping1, topping2, topping3]
-                
+
                 # removes repeated toppings
                 topArray = list(dict.fromkeys(topArray))
 
@@ -236,14 +236,14 @@ def submit_order(request):
                         i += 1
                     else:
                         top = ""
-                
+
                 if (i == 1):
                     pizza_topping = "1-Topping"
                 else:
                     pizza_topping = f"{i}-Toppings"
 
                 item = Pizza.objects.values_list(f'{pizzaSize}', flat=True).filter(Q(pizza=pizza_topping), Q(type=pizzaType))
-                pPrice = (item[0]  *  decimal_quantity) 
+                pPrice = (item[0]  *  decimal_quantity)
 
                 pizzaSize = pizzaSize.capitalize()
 
@@ -258,7 +258,7 @@ def submit_order(request):
                     custom_pizza = Cart(customer=request.user, item=f"{pizzaType} Pizza with {topArray[0]}, {topArray[1]}, and {topArray[2]} - {pizzaSize}", price=pPrice, qty=item_quantity)
                 custom_pizza.save()
 
-            except: 
+            except:
                 messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
 
@@ -298,7 +298,7 @@ def submit_order(request):
             except:
                 messages.error(request, 'Please Submit a Valid Order!', fail_silently=True)
                 return redirect("cart")
-        
+
         # if loop to get orr add salad to the cart table
         elif (itemType == "Salad"):
             try:
@@ -340,7 +340,7 @@ def checkOut(request):
         payment = 0
 
         receipt_items = []
-        
+
         objects = Cart.objects.filter(Q(customer=request.user))
 
         for price in Cart.objects.values_list('price', flat=True).filter(Q(customer=request.user)):
@@ -373,7 +373,7 @@ def removeItem(request):
     if request.method == "POST":
 
         item_id = request.POST["item_id"]
-        try: 
+        try:
             remove = Cart.objects.filter(Q(customer=request.user), Q(id=item_id)).delete()
             messages.success(request, "You have successfull removed the item from your cart", fail_silently=True)
         except:
@@ -387,7 +387,7 @@ def completed(request):
     if request.method == 'POST':
 
         objects = Cart.objects.filter(Q(customer=request.user))
-        
+
         order = Order(recipient=request.user)
         order.save()
 
@@ -395,8 +395,8 @@ def completed(request):
         for item in objects:
             order.items.add(item)
             order.save()
-        
-        # removes the items from the cart as they have been paid for 
+
+        # removes the items from the cart as they have been paid for
         remove_items = objects.delete()
 
         # ordered items to show up on the console
