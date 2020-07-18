@@ -1,13 +1,13 @@
-{% extends "orders/base.html" %} 
+{% extends "orders/base.html" %}
 
 {% load static %}
 
 <!-- title -->
-{% block title %} 
+{% block title %}
 
-Pinocchio's Pizza 
+Pinocchio's Pizza
 
-{% endblock %} 
+{% endblock %}
 
 {% block body %}
 
@@ -52,7 +52,7 @@ Pinocchio's Pizza
                         {{ item.item }}
                     </th>
                     <th class="center">
-                        {{ item.qty }} 
+                        {{ item.qty }}
                     </th>
                     <th class="float-right">
                         ${{ item.price }}
@@ -60,7 +60,7 @@ Pinocchio's Pizza
                 </tr>
                 {% endfor %}
                 <tr class="receipt-row">
-                    <th class="float-left">HST (+8%): </th> 
+                    <th class="float-left">HST (+8%): </th>
                     <th></th>
                     <th class="float-right">+ ${{ interest }}</th>
                 </tr>
@@ -76,10 +76,11 @@ Pinocchio's Pizza
     <div class="center">
         <div class="card-body" id="paypal-button-container"></div>
     </div>
-    
-    <div class="center justify-content-center display-none bold-30" id="payment-message">
-        <h4 class="center">Thank You for Shopping with Us</h4>
-        <h5 class="center">Hope You Have a Wonderful Meal!</h5>
+
+    <div class="center justify-content-center display-none bold-30"
+        id="payment-message" style="margin-top: 40px;">
+        <h4 class="center lobster">Thank You for Shopping with Us</h4>
+        <h5 class="center lobster">Hope You Have a Wonderful Meal!</h5>
     </div>
 
     <div class="center display-none" id="after-payment">
@@ -119,7 +120,7 @@ Pinocchio's Pizza
     const csrftoken = getCookie('csrftoken');
 
     var total = {{ payment }}
-    var productID = 
+    var productID =
 
     completeOrder = () => {
         var url = "{% url 'complete' %}"
@@ -133,14 +134,18 @@ Pinocchio's Pizza
             body: JSON.stringify({'Items_Ids': items_id})
         })
 
+        // hide the payment links after payment
+        const payment = document.querySelector('#paypal-button-container')
+        payment.style.display = 'none'
+
         // display redirect urls after payment
         const element = document.querySelector('#after-payment')
         element.style.display = 'inline-flex'
         element.style.width = '100%'
 
-        // display 'thank you' messages after the payment 
+        // display 'thank you' messages after the payment
         const message = document.querySelector('#payment-message')
-        message.style.display = 'block' 
+        message.style.display = 'block'
     }
 
     paypal.Buttons({
