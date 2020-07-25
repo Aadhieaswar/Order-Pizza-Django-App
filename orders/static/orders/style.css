@@ -226,7 +226,6 @@ footer {
 
 .hover-style:hover {
     background-color: orange;
-    transform: scale(1.025);
 }
 
 .hover-style:hover .card-li {
