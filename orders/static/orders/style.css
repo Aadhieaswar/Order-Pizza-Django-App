@@ -1,6 +1,12 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -73,37 +79,31 @@ footer {
 }
 
 .link-orange {
-    float: right;
-    font-weight: bold;
-    color: orange;
-    padding: 10px;
-    border: 2px solid orange;
-    border-radius: 4px;
-    text-decoration: none;
-    margin: 10px;
+    color: #1d2124;
+    text-transform: capitalize;
+    font-family: 'Lato', sans-serif;
 }
 
 .username {
-    float: right;
     font-weight: bold;
     font-size: 30px;
     padding: 10px;
     margin-top: 5px;
     color: #f6800a;
-    font-family: "Lobster";
+    font-family: 'Lobster', cursive;
 }
 
 .link-orange:hover {
-    color: #1d2124;
-    background-color: orange;
-    text-decoration: none;
+    color: white;
+    background-color: #f6800a;
+    transition: all 0.5s ease;
 }
 
 .welcoming {
     justify-content: center;
     font-size: 40px;
     color: orange;
-    font-family: "Lobster";
+    font-family: 'Lobster', cursive;
 }
 
 .table-align-items {
@@ -118,20 +118,20 @@ footer {
     display: table;
     vertical-align: middle;
     font-size: 55px;
-    font-family: "Lobster";
+    font-family: 'Lobster', cursive;
     padding: 15px;
 }
 
 .field-80 {
-    margin-top: 10px;
-    margin-left: 10%;
     width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 .field-50 {
+    width: 50%;
+    margin: 0 auto;
     margin-top: 10px;
-    margin-left: 25%;
-    width: 50%
 }
 
 .vis {
@@ -187,7 +187,7 @@ footer {
 .header-style {
     border-bottom: 5px solid white;
     background-color: #1d2124;
-    color: white
+    color: white;
 }
 
 .card-ul {
@@ -226,12 +226,13 @@ footer {
 
 .hover-style:hover {
     background-color: orange;
+    transition: all 0.3s ease;
 }
 
 .hover-style:hover .card-li {
     color: white;
     border-right: 2px solid white;
-    font-size: 25px;
+    transition: all 0.3s ease;
 }
 
 .menu-head {
@@ -244,8 +245,16 @@ footer {
     border: 5px double white;
     width: 90%;
     justify-content: center;
-    margin-left: 5%;
+    align-items: center;
+    margin: 0 auto;
     margin-top: 20px;
+    background-color: orange;
+    padding: 10px;
+    text-align: center;
+}
+
+.link-container {
+    justify-content: center;
 }
 
 .white {
@@ -366,6 +375,7 @@ footer {
 .options {
     display: none;
     justify-content: center;
+    transition: all 1s ease;
     margin-bottom: 10px;
 }
 
@@ -454,6 +464,10 @@ footer {
     justify-content: center;
 }
 
+.fira-code {
+    font-family: 'Fira Code', monospace;
+}
+
 .receipt-row {
     height: 30px;
 }
@@ -484,6 +498,159 @@ footer {
     font-weight: bold;
     font-size: 40px;
     color: coral;
+}
+
+.top-margin {
+    margin-top: -50px;
+}
+
+/* responsive nav bar styling */
+.nav-wrapper {
+    min-height: 90px;
+    padding-bottom: none;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.res-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #1d2124;
+    font-family: 'Lobster', Arial, Helvetica, sans-serif;
+    border-bottom: 5px solid white;
+    padding: 10px;
+}
+
+.res-image {
+    max-width: 90px;
+    min-height: 90px;
+    padding: 10px;
+}
+
+.res-logo {
+    color: #f6800a;
+    letter-spacing: 5px;
+    font-size: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.res-logo h4 {
+    font-size: 50px;
+    font-family: 'Lobster', cursive;
+}
+
+.res-links {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    align-items: center;
+    z-index: 10;
+}
+
+.res-links li {
+    list-style-type: none;
+}
+
+.res-links a {
+    letter-spacing: 2px;
+    font-size: 20px;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    padding: 8px;
+    background-color: orange;
+    border-radius: 16px;
+}
+
+.res-icon {
+    display: none;
+    border: 1px solid #f6800a;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.res-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: orange;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 1024px) {
+    .res-links {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .res-links {
+        position: absolute;
+        right: 0px;
+        height: 50%;
+        top: 115px;
+        background-color: #1d2124;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(110%);
+        transition: transform 0.5s ease-in;
+        border-bottom: 5px solid #f6800a;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        position: absolute;
+    }
+
+    .res-links li {
+        opacity: 0;
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .res-links a {
+        background-color: transparent;
+        color: orange;
+    }
+
+    .res-icon {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+.res-active {
+    transform: translateX(0%);
+}
+
+@keyframes resLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .item1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .item2 {
+    opacity: 0;
+}
+
+.toggle .item3 {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 @media screen and (max-width: 1250px) {

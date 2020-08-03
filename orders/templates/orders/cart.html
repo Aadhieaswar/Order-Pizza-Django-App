@@ -1,31 +1,58 @@
-{% extends "orders/base.html" %} 
+{% extends "orders/base.html" %}
 
 {% load static %}
 
 <!-- title -->
-{% block title %} 
+{% block title %}
 
-Cart 
+Cart
 
-{% endblock %} 
+{% endblock %}
 
 {% block body %}
 
 <!-- NavBar -->
-<div class="head">
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="col">
-            <img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
-            <h1 class="title-lobster">Pinocchio's Pizza</h1>
+<main class="nav-wrapper">
+    <nav class="res-nav box-shadow">
+        <div class="res-logo">
+            <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
+            <h4>Pinocchio's</h4>
         </div>
+        <ul class="res-links">
+            <li>
+                <div class="username">{{ request.user }}</div>
+            </li>
+            <li>
+                <a class="link-orange" href="{% url 'home' %}">Home</a>
+            </li>
 
-        <div class="col" style="margin-top: 10px;">
-            <a class="link-orange" href="{% url 'home' %}">Home</a>
-            <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
-            <div class="username">{{ request.user }}</div>
+            {% if not request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'login_view' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'signup_view' %}">SignUp</a>
+            </li>
+            {% endif %}
+
+            <li>
+                <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
+            </li>
+
+            {% if request.user.is_authenticated %}
+            <li>
+                <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+            </li>
+            {% endif %}
+        </ul>
+        <div class="res-icon">
+            <div class="item1"></div>
+            <div class="item2"></div>
+            <div class="item3"></div>
         </div>
-    </div>
-</div>
+    </nav>
+    <script src="{% static 'orders/nav.js' %}"></script>
+</main>
 
 <!-- Content -->
 {% if messages %}
@@ -36,7 +63,7 @@ Cart
 </div>
 {% endif %}
 
-<div class="card box-shadow order-strip border-warning">
+<div class="card box-shadow order-strip border-warning top-margin">
     <div class="card-header bg-light bold-30 center order-title border-warning">
         &nbsp Order From Pinocchio's Pizza
     </div>
@@ -59,7 +86,7 @@ Cart
             <button type="button" class="btn btn-success item-button" id="order-item">Order</button>
         </div>
         <div class="center invalid-feedback sel-item-warn" id="warn">
-            &#9888 Please choose an item to order
+            ⚠ Please choose an item to order
         </div>
 
         <!-- Input type to get quantity -->
@@ -216,7 +243,7 @@ Cart
             <div class="bold-30" style="margin-bottom: 10px;"> Choose the Dinner Platter you enjoy! </div>
 
             <p>
-                <select class="custom-select field-40" name="DPType"> 
+                <select class="custom-select field-40" name="DPType">
                     <option value="none">Platter Type...</option>
                     {% for platter in dinner_platters %}
                     <option value="{{ platter.platter }}">{{ platter.platter }}</option>
@@ -235,7 +262,7 @@ Cart
     </form>
 </div>
 
-<div class="card border-light cart-container box-shadow">
+<div class="card border-light cart-container box-shadow" style="margin-bottom: 100px;">
     <div class="card-header bold-30 bg-dark cart-title">
 
         {{ request.user }}'s Cart

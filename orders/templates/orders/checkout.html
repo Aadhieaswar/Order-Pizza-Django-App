@@ -12,24 +12,38 @@ Pinocchio's Pizza
 {% block body %}
 
 <!-- NavBar -->
-<div class="head">
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="col">
-            <img src="{% static 'images/logo.png' %}" class="logo" loading="lazy">
-            <h1 class="title-lobster">Pinocchio's Pizza</h1>
+<main class="nav-wrapper">
+    <nav class="res-nav box-shadow">
+        <div class="res-logo">
+            <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
+            <h4>Pinocchio's</h4>
         </div>
-
-        <div class="col" style="margin-top: 10px;">
-            <a class="link-orange" href="{% url 'home' %}">Home</a>
-            <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
-            <div class="username">{{ request.user }}</div>
+        <ul class="res-links">
+            <li>
+                <div class="username">{{ request.user }}</div>
+            </li>
+            <li>
+                <a class="link-orange" href="{% url 'home' %}">Home</a>
+            </li>
+            <li>
+                <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
+            </li>
+            <li>
+                <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+            </li>
+        </ul>
+        <div class="res-icon">
+            <div class="item1"></div>
+            <div class="item2"></div>
+            <div class="item3"></div>
         </div>
-    </div>
-</div>
+    </nav>
+    <script src="{% static 'orders/nav.js' %}"></script>
+</main>
 
 <!-- content -->
-<div class="style-card">
-    <div class="card border-dark bg-light">
+<div class="style-card top-margin" style="margin-bottom: 100px;">
+    <div class="card border-dark bg-light fira-code">
         <div class="card-header border-dark center bold-30 receipt-title">
             Your Receipt
         </div>
@@ -54,7 +68,7 @@ Pinocchio's Pizza
                     <th class="center">
                         {{ item.qty }}
                     </th>
-                    <th class="float-right">
+                    <th class="center" style="text-align: right;">
                         ${{ item.price }}
                     </th>
                 </tr>

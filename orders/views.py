@@ -409,4 +409,8 @@ def completed(request):
 
         return JsonResponse("Payment Successful", safe=False)
 
-    return HttpResponse("Forbidden!")
+    return HttpResponse('Forbidden!')
+
+def contact_us(request):
+
+    return HttpResponse('Contact Us')

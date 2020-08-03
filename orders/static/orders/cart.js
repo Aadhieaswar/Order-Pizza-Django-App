@@ -60,3 +60,4 @@ document.querySelector('#order-item').onclick = () => {
         document.querySelector('.special-options').style.display = 'block'
     }
 }
+
