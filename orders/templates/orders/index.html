@@ -12,52 +12,63 @@ Pinocchio's Pizza
 
 <!-- NavBar -->
 <main class="nav-wrapper">
-    <nav class="res-nav box-shadow">
-        <div class="res-logo">
-            <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
-            <h4>Pinocchio's</h4>
-        </div>
-        <ul class="res-links">
-            {% if request.user.is_authenticated %}
-            <li>
-                <div class="username">{{ request.user }}</div>
-            </li>
-            {% endif %}
+  <nav class="res-nav box-shadow">
+    <div class="res-logo">
+      <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
+      <h4>Pinocchio's</h4>
+    </div>
+    <ul class="res-links">
+      {% if request.user.is_authenticated %}
+      <li>
+        <div class="username">{{ request.user }}</div>
+      </li>
+      {% endif %}
 
-            {% if not request.user.is_authenticated %}
-            <li>
-                <a class="link-orange" href="{% url 'login_view' %}">Login</a>
-            </li>
-            <li>
-                <a class="link-orange" href="{% url 'signup_view' %}">SignUp</a>
-            </li>
-            {% endif %}
+      {% if not request.user.is_authenticated %}
+      <li>
+        <a class="link-orange" href="{% url 'login_view' %}">Login</a>
+      </li>
+      <li>
+        <a class="link-orange" href="{% url 'signup_view' %}">SignUp</a>
+      </li>
+      {% endif %}
 
-            <li>
-                <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
-            </li>
+      <li>
+        <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
+      </li>
 
-            {% if request.user.is_authenticated %}
-            <li>
-                <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
-            </li>
-            {% endif %}
-        </ul>
-        <div class="res-icon">
-            <div class="item1"></div>
-            <div class="item2"></div>
-            <div class="item3"></div>
-        </div>
-    </nav>
-    <script src="{% static 'orders/nav.js' %}"></script>
+      {% if request.user.is_authenticated %}
+      <li>
+        <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+      </li>
+      {% endif %}
+    </ul>
+    <div class="res-icon">
+      <div class="item1"></div>
+      <div class="item2"></div>
+      <div class="item3"></div>
+    </div>
+  </nav>
+  <script src="{% static 'orders/nav.js' %}"></script>
+</main>
+
+<!-- Home decoration -->
+<main class="home-decor">
+<!-- <div class="slides fade"> -->
+  <!--     <img src="{% static 'images/dough.jpg' %}" alt="Pizza-image-1" class="pizza-image box-shadow"/> -->
+  <!-- </div> -->
+  <div class="slides fade">
+    <img src="{% static 'images/pizza-1.jpg' %}" alt="Pizza-image-1" class="pizza-image box-shadow"/>
+  </div>
+  <script src="{% static 'orders/home.js' %}"></script>
 </main>
 
 <!-- Content -->
 {% if messages %}
 <div class="table-align-items top-margin">
-    {% for message in messages %}
-    <div class="badge welcoming" style="color: #1d2124;">{{ message }}</div>
-    {% endfor %}
+  {% for message in messages %}
+  <div class="badge welcoming" style="color: #1d2124;">{{ message }}</div>
+  {% endfor %}
 </div>
 <div style="width: 95%; border-bottom: 1px solid #1d2124; margin: 0 auto; margin-top: 5px;"></div>
 <div style="width: 95%; border-bottom: 1px solid #1d2124; margin: 0 auto; margin-top: 2px; margin-bottom: 80px;"></div>
@@ -67,195 +78,195 @@ Pinocchio's Pizza
 
 <div class="nav nav-light bg-warning cus-nav box-shadow">
 
-    <ul class="nav nav-pills link-container">
-        <li class="nav-item">
-            <a class="nav-link white" href="#pizzas">Pizza</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white" href="#pizzaToppings">Pizza Toppings</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white" href="#subs">Subs</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white" href="#extras">Sub Extras</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white" href="#pastas">Pasta</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white" href="#salads">Salad</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link white" href="#DPs">Dinner Platters</a>
-        </li>
-    </ul>
+  <ul class="nav nav-pills link-container">
+    <li class="nav-item">
+      <a class="nav-link white" href="#pizzas">Pizza</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#pizzaToppings">Pizza Toppings</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#subs">Subs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#extras">Sub Extras</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#pastas">Pasta</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#salads">Salad</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link white" href="#DPs">Dinner Platters</a>
+    </li>
+  </ul>
 
 </div>
 
 <div style="text-align: center; width: 100%; margin-top: 20px; margin-bottom: 100px;">
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="pizzas"> Pizza </h1>
-            <tr>
-                <th class="table-head">
-                    <h4>Type</h4>
-                </th>
-                <th class="table-head">
-                    <h4>Pizza</h4>
-                </th>
-                <th class="table-head">
-                    <h4>Small</h4>
-                </th>
-                <th class="table-head end">
-                    <h4>Large</h4>
-                </th>
-            </tr>
-            {% for pizza in pizzas %}
-            <tr title="{{ pizza }}" data-item="{{ pizza.id }}" data-type="Pizza" class="center hover-style cart-add">
-                <td class="card-li"> {{ pizza.type }}</td>
-                <td class="card-li">{{ pizza.pizza }}</td>
-                <td class="card-li">${{ pizza.small }}</td>
-                <td class="card-li end">${{ pizza.large }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="pizzas"> Pizza </h1>
+      <tr>
+        <th class="table-head">
+          <h4>Type</h4>
+        </th>
+        <th class="table-head">
+          <h4>Pizza</h4>
+        </th>
+        <th class="table-head">
+          <h4>Small</h4>
+        </th>
+        <th class="table-head end">
+          <h4>Large</h4>
+        </th>
+      </tr>
+      {% for pizza in pizzas %}
+      <tr title="{{ pizza }}" data-item="{{ pizza.id }}" data-type="Pizza" class="center hover-style cart-add">
+        <td class="card-li"> {{ pizza.type }}</td>
+        <td class="card-li">{{ pizza.pizza }}</td>
+        <td class="card-li">${{ pizza.small }}</td>
+        <td class="card-li end">${{ pizza.large }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="pizzaToppings"> Pizza Toppings </h1>
-            <tr>
-                <th class="table-head">
-                    <h4>Toppings</h4>
-                </th>
-            </tr>
-            {% for top in toppings %}
-            <tr title="{{ top }}" data-item="{{ top.id }}" data-type="Topping" class="center hover-style cart-add">
-                <td class="card-li end">{{ top }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="pizzaToppings"> Pizza Toppings </h1>
+      <tr>
+        <th class="table-head">
+          <h4>Toppings</h4>
+        </th>
+      </tr>
+      {% for top in toppings %}
+      <tr title="{{ top }}" data-item="{{ top.id }}" data-type="Topping" class="center hover-style cart-add">
+        <td class="card-li end">{{ top }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="subs"> Subs </h1>
-            <h4 class="center text-muted text-15">
-                The Sausage, Peppers & Onions subs are available only as large subs
-            </h4>
-            <tr>
-                <th class="table-head">
-                    <h4>Sub</h4>
-                </th>
-                <th class="table-head">
-                    <h4>Small</h4>
-                </th>
-                <th class="table-head end">
-                    <h4>Large</h4>
-                </th>
-            </tr>
-            {% for sub in subs %}
-            <tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
-                <td class="card-li">{{ sub.sub }}</td>
-                <td class="card-li">${{ sub.small }}</td>
-                <td class="card-li end">${{ sub.large }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="subs"> Subs </h1>
+      <h4 class="center text-muted text-15">
+        The Sausage, Peppers & Onions subs are available only as large subs
+      </h4>
+      <tr>
+        <th class="table-head">
+          <h4>Sub</h4>
+        </th>
+        <th class="table-head">
+          <h4>Small</h4>
+        </th>
+        <th class="table-head end">
+          <h4>Large</h4>
+        </th>
+      </tr>
+      {% for sub in subs %}
+      <tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
+        <td class="card-li">{{ sub.sub }}</td>
+        <td class="card-li">${{ sub.small }}</td>
+        <td class="card-li end">${{ sub.large }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="extras"> Extras for Subs </h1>
-            <h4 class="center text-muted text-15">
-                These Items can be purchased additionally with any Sub
-            </h4>
-            <tr>
-                <th class="table-head">
-                    <h4>Extras</h4>
-                </th>
-                <th class="table-head">
-                    <h4>Small</h4>
-                </th>
-                <th class="table-head end">
-                    <h4>Large</h4>
-                </th>
-            </tr>
-            {% for add in sub_add %}
-            <tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
-                <td class="card-li">{{ add.item }}</td>
-                <td class="card-li">${{ add.small }}</td>
-                <td class="card-li end">${{ add.large }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="extras"> Extras for Subs </h1>
+      <h4 class="center text-muted text-15">
+        These Items can be purchased additionally with any Sub
+      </h4>
+      <tr>
+        <th class="table-head">
+          <h4>Extras</h4>
+        </th>
+        <th class="table-head">
+          <h4>Small</h4>
+        </th>
+        <th class="table-head end">
+          <h4>Large</h4>
+        </th>
+      </tr>
+      {% for add in sub_add %}
+      <tr title="{{ sub }}" data-item="{{ sub.id }}" data-type="Sub" class="center hover-style cart-add">
+        <td class="card-li">{{ add.item }}</td>
+        <td class="card-li">${{ add.small }}</td>
+        <td class="card-li end">${{ add.large }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="pastas"> Pasta </h1>
-            <tr>
-                <th class="table-head">
-                    <h4>Pasta</h4>
-                </th>
-                <th class="table-head end">
-                    <h4>Regular</h4>
-                </th>
-            </tr>
-            {% for pasta in pastas %}
-            <tr title="{{ pasta }}" data-item="{{ pasta.id }}" data-type="Pasta" class="center hover-style cart-add">
-                <td class="card-li">{{ pasta.pasta }}</td>
-                <td class="card-li end">${{ pasta.cost }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="pastas"> Pasta </h1>
+      <tr>
+        <th class="table-head">
+          <h4>Pasta</h4>
+        </th>
+        <th class="table-head end">
+          <h4>Regular</h4>
+        </th>
+      </tr>
+      {% for pasta in pastas %}
+      <tr title="{{ pasta }}" data-item="{{ pasta.id }}" data-type="Pasta" class="center hover-style cart-add">
+        <td class="card-li">{{ pasta.pasta }}</td>
+        <td class="card-li end">${{ pasta.cost }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="salads"> Salad </h1>
-            <tr>
-                <th class="table-head">
-                    <h4>Salad</h4>
-                </th>
-                <th class="table-head end">
-                    <h4>Regular</h4>
-                </th>
-            </tr>
-            {% for salad in salads %}
-            <tr title="{{ salad }}" data-item={{salad.id}} data-type="Salad" class="center hover-style cart-add">
-                <td class="card-li">{{ salad.salad }}</td>
-                <td class="card-li end">${{ salad.cost }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="salads"> Salad </h1>
+      <tr>
+        <th class="table-head">
+          <h4>Salad</h4>
+        </th>
+        <th class="table-head end">
+          <h4>Regular</h4>
+        </th>
+      </tr>
+      {% for salad in salads %}
+      <tr title="{{ salad }}" data-item={{salad.id}} data-type="Salad" class="center hover-style cart-add">
+        <td class="card-li">{{ salad.salad }}</td>
+        <td class="card-li end">${{ salad.cost }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-    <div class="card-ul">
-        <table class="table-cus">
-            <h1 class="center menu-head" id="DPs"> Dinner Platters </h1>
-            <tr>
-                <th class="table-head">
-                    <h4>Platters</h4>
-                </th>
-                <th class="table-head">
-                    <h4>Small</h4>
-                </th>
-                <th class="table-head end">
-                    <h4>Large</h4>
-                </th>
-            </tr>
-            {% for DP in dinner_platters %}
-            <tr title="{{ DP }}" data-item="{{ DP.id }}" data-type="DinnerPlatter" class="center hover-style cart-add">
-                <td class="card-li">{{ DP.platter }}</td>
-                <td class="card-li">${{ DP.small }}</td>
-                <td class="card-li end">${{ DP.large }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+  <div class="card-ul">
+    <table class="table-cus">
+      <h1 class="center menu-head" id="DPs"> Dinner Platters </h1>
+      <tr>
+        <th class="table-head">
+          <h4>Platters</h4>
+        </th>
+        <th class="table-head">
+          <h4>Small</h4>
+        </th>
+        <th class="table-head end">
+          <h4>Large</h4>
+        </th>
+      </tr>
+      {% for DP in dinner_platters %}
+      <tr title="{{ DP }}" data-item="{{ DP.id }}" data-type="DinnerPlatter" class="center hover-style cart-add">
+        <td class="card-li">{{ DP.platter }}</td>
+        <td class="card-li">${{ DP.small }}</td>
+        <td class="card-li end">${{ DP.large }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
 </div>
 
@@ -263,10 +274,10 @@ Pinocchio's Pizza
 
 <div class="right" style="display: flex;">
 
-    <a title="{{ count_message }}" href="{% url 'cart' %}" class="btn btn-light black-bor box-shadow" id="order">
-        <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
-        <span class="badge badge-success">{{ count }}</span>
-    </a>
+  <a title="{{ count_message }}" href="{% url 'cart' %}" class="btn btn-light black-bor box-shadow" id="order">
+    <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
+    <span class="badge badge-success">{{ count }}</span>
+  </a>
 
 </div>
 
