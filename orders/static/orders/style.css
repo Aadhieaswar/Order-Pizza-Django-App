@@ -713,33 +713,13 @@ footer {
   background-color: rgba(0, 0, 0, 0.4);;
 }
 
-.prev, .next {
-  position: absolute;
-  padding: 16px;
-  width: 5%;
-  right: 95%;
-  top: 40%;
-  border-radius: 0 3px 3px 0;
-  font-size: 20px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.next {
-  left: 95%;
-  border-radius: 3px 0 0 3px;
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
 .dot {
   cursor: pointer;
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color: #bbb;
+  /* background-color: #bbb; */
+  background-color: orange;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
@@ -748,26 +728,18 @@ footer {
 .active, .dot:hover {
   transition: 1s ease forwards;
   transform: scale(1.25);
-  background-color: #717171;
+  /* background-color: #717171; */
+  background-color: #f6800b;
 }
 
 @media screen and (max-width: 840px) {
-
-  .next, .prev {
-    top: 32%;
-  }
-
-  .next {
-    left: 92%;
-    width: 8%;
-  }
-
-  .prev {
-    right: 92%;
-  }
-
   .carousel-text {
+    margin-top: -15%;
     font-size: 16px;
+  }
+
+  .numbertext {
+    font-size: 20px;
   }
 }
 
