@@ -54,13 +54,43 @@ Pinocchio's Pizza
 
 <!-- Home decoration -->
 <main class="home-decor">
-<!-- <div class="slides fade"> -->
-  <!--     <img src="{% static 'images/dough.jpg' %}" alt="Pizza-image-1" class="pizza-image box-shadow"/> -->
-  <!-- </div> -->
-  <div class="slides fade">
-    <img src="{% static 'images/pizza-1.jpg' %}" alt="Pizza-image-1" class="pizza-image box-shadow"/>
+
+  <!-- slides -->
+  <div class="slides fade" style="display: block;">
+    <div class="numbertext">1 / 4</div>
+    <img src="{% static 'images/dough.jpg' %}" alt="Pizza-image-1" class="pizza-image"/>
+    <div class="carousel-text">Each Pizza Made With Utmost Care</div>
   </div>
+
+  <div class="slides fade">
+    <div class="numbertext">2 / 4</div>
+    <img src="{% static 'images/pizza-1.jpg' %}" alt="Pizza-image-2" class="pizza-image"/>
+    <div class="carousel-text">Enjoy Your Favourite Pizza at Your Favourite Place</div>
+  </div>
+
+  <div class="slides fade">
+    <div class="numbertext">3 / 4</div>
+    <img src="{% static 'images/pizza-2.jpg' %}" alt="Pizza-image-1" class="pizza-image"/>
+    <div class="carousel-text">Menu Filled With Items You can Enjoy With Friends and Family</div>
+  </div>
+
+  <div class="slides fade">
+    <div class="numbertext">4 / 4</div>
+    <img src="{% static 'images/pizza-3.jpg' %}" alt="Pizza-image-2" class="pizza-image"/>
+    <div class="carousel-text">Baked With the Right Amount of Crispiness and Jusiness</div>
+  </div>
+
+  <!-- The dots/circles -->
+  <div style="text-align: center; padding-top: 10px;">
+    <span class="dot" id="slide-1"></span>
+    <span class="dot" id="slide-2"></span>
+    <span class="dot" id="slide-3"></span>
+    <span class="dot" id="slide-4"></span>
+  </div>
+
+  <!-- javascript for the carousel -->
   <script src="{% static 'orders/home.js' %}"></script>
+
 </main>
 
 <!-- Content -->
