@@ -16,13 +16,13 @@ from .models import *
 
 # global vars
 Menu = {
-'pizza': Pizza.objects.all(),
-'salad': Salad.objects.all(),
-'sub': Sub.objects.all(),
-'dinnerplatter': DinnerPlatter.objects.all(),
-'pasta': Pasta.objects.all(),
-'topping': Topping.objects.all(),
-'SubAdd': SubAdditional.objects.all(),
+    'pizza': Pizza.objects.all(),
+    'salad': Salad.objects.all(),
+    'sub': Sub.objects.all(),
+    'dinnerplatter': DinnerPlatter.objects.all(),
+    'pasta': Pasta.objects.all(),
+    'topping': Topping.objects.all(),
+    'SubAdd': SubAdditional.objects.all(),
 }
 
 # Create your views here.

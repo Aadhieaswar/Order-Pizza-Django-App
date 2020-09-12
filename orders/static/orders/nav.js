@@ -6,20 +6,20 @@ const navSlide = () => {
     resIcon.addEventListener('click', () => {
 
         // toggle view
-        resOpt.classList.toggle('res-active')
+    resOpt.classList.toggle('res-active')
 
-        // link animations
-        resLinks.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = ''
-            } else {
-                link.style.animation = `resLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`
-            }
-        })
-
-        // burger animation
-        resIcon.classList.toggle('toggle')
+    // link animations
+    resLinks.forEach((link, index) => {
+      if (link.style.animation) {
+        link.style.animation = ''
+      } else {
+        link.style.animation = `resLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`
+      }
     })
+
+    // burger animation
+    resIcon.classList.toggle('toggle')
+  })
 }
 
 navSlide()
