@@ -526,7 +526,6 @@ footer {
 
 .res-image {
   max-width: 90px;
-  min-height: 90px;
   padding: 10px;
 }
 
@@ -718,7 +717,6 @@ footer {
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  /* background-color: #bbb; */
   background-color: orange;
   border-radius: 50%;
   display: inline-block;
@@ -728,8 +726,14 @@ footer {
 .active, .dot:hover {
   transition: 1s ease forwards;
   transform: scale(1.25);
-  /* background-color: #717171; */
   background-color: #f6800b;
+}
+
+.footer-image {
+  width: 90px;
+  margin: 0 auto;
+  margin-top: 30px;
+  align-self: center;
 }
 
 @media screen and (max-width: 840px) {
