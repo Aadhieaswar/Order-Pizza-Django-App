@@ -53,9 +53,10 @@ $RECYCLE.BIN/
 venv
 venv/*
 
-# pycahe
-*/__pycache__/
+# pycahe and its files
+**/__pycache__/
 __pycache__/
+*.pyc
 
 # database file
 db.sqlite3
