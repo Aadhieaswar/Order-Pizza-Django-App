@@ -1,4 +1,4 @@
-# Online Pizza Website
+# Pizza Website
 
 ### Requirements
 - `Python3.6 frameworks/packages` :
