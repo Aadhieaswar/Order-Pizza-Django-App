@@ -41,7 +41,7 @@
 - The `images` directory holds many pictures that show you the look of the website
 
 ### Features of the Website
-##### Create a new listing
+##### Place a new order
   ![place-pizza-order](./images/make-order.gif)
   <br>
 Here, it is shown how to place an order of any pizza or other items in the menu through the website.
