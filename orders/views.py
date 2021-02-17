@@ -413,4 +413,4 @@ def completed(request):
 
 def contact_us(request):
 
-    return HttpResponse('Contact Us')
+    return render(request, "orders/contact.html")

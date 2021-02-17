@@ -653,6 +653,61 @@ footer {
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
+/* contact us page styles */
+.icon-container {
+  width: 100%;
+  text-align: center;
+  margin-top: -100px;
+}
+
+.contact-icon {
+  height: 100px;
+  width: 100px;
+}
+
+.contact-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.contact-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.con-text {
+  color: var(--info);
+}
+
+.con-info, .con-text {
+  text-align: center;
+  line-height: 25px;
+}
+
+.con-info {
+  list-style-type: none;
+}
+
+.con-info > li {
+  padding: 10px;
+}
+
+.address-content {
+  color: #f6800a;
+}
+
+.phoneNum-container {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.phoneNum {
+  color: #f6800a;
+}
+/* contact page styles end */
+
 /* carousel styles start */
 .home-decor {
   position: relative;
@@ -736,6 +791,7 @@ footer {
   align-self: center;
 }
 
+/* media queries */
 @media screen and (max-width: 840px) {
   .carousel-text {
     margin-top: -15%;
