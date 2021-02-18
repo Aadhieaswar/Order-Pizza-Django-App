@@ -9,34 +9,20 @@ Pinocchio's Pizza
 
 {% endblock %}
 
-{% block body %}
-
 <!-- NavBar -->
-<main class="nav-wrapper">
-    <nav class="res-nav box-shadow">
-        <div class="res-logo">
-            <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
-            <h4>Pinocchio's</h4>
-        </div>
-        <ul class="res-links">
-            <li>
-                <a class="link-orange" href="{% url 'home' %}">Home</a>
-            </li>
-            <li>
-                <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
-            </li>
-            <li>
-                <a class="link-orange" href="{% url 'login_view' %}">LogIn</a>
-            </li>
-        </ul>
-        <div class="res-icon">
-            <div class="item1"></div>
-            <div class="item2"></div>
-            <div class="item3"></div>
-        </div>
-    </nav>
-    <script src="{% static 'orders/nav.js' %}"></script>
-</main>
+{% block nav %}
+  <li>
+      <a class="link-orange" href="{% url 'home' %}">Home</a>
+  </li>
+  <li>
+      <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
+  </li>
+  <li>
+      <a class="link-orange" href="{% url 'login_view' %}">LogIn</a>
+  </li>
+{% endblock %}
+
+{% block body %}
 
 <!-- Content -->
 <div class="card card-custom top-margin">

@@ -15,6 +15,23 @@
 
   <body>
     <main>
+      <main class="nav-wrapper">
+          <nav class="res-nav box-shadow">
+              <div class="res-logo">
+                  <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
+                  <h4>Pinocchio's</h4>
+              </div>
+              <ul class="res-links">
+                {% block nav %} {% endblock %}
+              </ul>
+              <div class="res-icon">
+                  <div class="item1"></div>
+                  <div class="item2"></div>
+                  <div class="item3"></div>
+              </div>
+          </nav>
+          <script src="{% static 'orders/nav.js' %}"></script>
+      </main>
       {% block body %}{% endblock %}
     </main>
   </body>
