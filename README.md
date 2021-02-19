@@ -46,8 +46,9 @@
   <br>
 Here, it is shown how to place an order of any pizza or other items in the menu through the website.
   <hr>
+
 ##### Responsive Design
-  ![place-pizza-order](./images/responsive-design.gif)
+  ![responsive-design](./images/responsive-design.gif)
   <br>
 Here, it is shown the responsive view of the website (in mobile).
   <hr>
