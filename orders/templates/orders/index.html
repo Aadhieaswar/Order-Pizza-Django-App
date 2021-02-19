@@ -8,49 +8,35 @@ Pinocchio's Pizza
 
 {% endblock %}
 
-{% block body %}
-
 <!-- NavBar -->
-<main class="nav-wrapper">
-  <nav class="res-nav box-shadow">
-    <div class="res-logo">
-      <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
-      <h4>Pinocchio's</h4>
-    </div>
-    <ul class="res-links">
-      {% if request.user.is_authenticated %}
-      <li>
-        <div class="username">{{ request.user }}</div>
-      </li>
-      {% endif %}
+{% block nav %}
+  {% if request.user.is_authenticated %}
+  <li>
+    <div class="username">{{ request.user|truncatechars:6 }}</div>
+  </li>
+  {% endif %}
 
-      {% if not request.user.is_authenticated %}
-      <li>
-        <a class="link-orange" href="{% url 'login_view' %}">Login</a>
-      </li>
-      <li>
-        <a class="link-orange" href="{% url 'signup_view' %}">SignUp</a>
-      </li>
-      {% endif %}
+  {% if not request.user.is_authenticated %}
+  <li>
+    <a class="link-orange" href="{% url 'login_view' %}">Login</a>
+  </li>
+  <li>
+    <a class="link-orange" href="{% url 'signup_view' %}">SignUp</a>
+  </li>
+  {% endif %}
 
-      <li>
-        <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
-      </li>
+  <li>
+    <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
+  </li>
 
-      {% if request.user.is_authenticated %}
-      <li>
-        <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
-      </li>
-      {% endif %}
-    </ul>
-    <div class="res-icon">
-      <div class="item1"></div>
-      <div class="item2"></div>
-      <div class="item3"></div>
-    </div>
-  </nav>
-  <script src="{% static 'orders/nav.js' %}"></script>
-</main>
+  {% if request.user.is_authenticated %}
+  <li>
+    <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+  </li>
+  {% endif %}
+{% endblock %}
+
+{% block body %}
 
 <!-- message showed upon login -->
 {% if messages %}
@@ -303,9 +289,9 @@ Pinocchio's Pizza
 
 {% if request.user.is_authenticated %}
 
-<div class="right" style="display: flex;">
+<div class="right cart-btn">
 
-  <a title="{{ count_message }}" href="{% url 'cart' %}" class="btn btn-light black-bor box-shadow" id="order">
+  <a title="{{ count_message }}" href="{% url 'cart' %}" class="btn btn-light black-bor box-shadow">
     <img src="{% static 'images/Shopping_Cart.png' %}" class="order-btn">
     <span class="badge badge-success">{{ count }}</span>
   </a>

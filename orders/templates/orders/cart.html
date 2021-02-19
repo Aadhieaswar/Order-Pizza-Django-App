@@ -9,50 +9,36 @@ Cart
 
 {% endblock %}
 
-{% block body %}
-
 <!-- NavBar -->
-<main class="nav-wrapper">
-    <nav class="res-nav box-shadow">
-        <div class="res-logo">
-            <img src="{% static 'images/logo.png' %}" class="res-image" loading="lazy">
-            <h4>Pinocchio's</h4>
-        </div>
-        <ul class="res-links">
-            <li>
-                <div class="username">{{ request.user }}</div>
-            </li>
-            <li>
-                <a class="link-orange" href="{% url 'home' %}">Home</a>
-            </li>
+{% block nav %}
+  <li>
+    <div class="username">{{ request.user|truncatechars:6 }}</div>
+  </li>
+  <li>
+    <a class="link-orange" href="{% url 'home' %}">Home</a>
+  </li>
 
-            {% if not request.user.is_authenticated %}
-            <li>
-                <a href="{% url 'login_view' %}">Login</a>
-            </li>
-            <li>
-                <a href="{% url 'signup_view' %}">SignUp</a>
-            </li>
-            {% endif %}
+  {% if not request.user.is_authenticated %}
+  <li>
+    <a href="{% url 'login_view' %}">Login</a>
+  </li>
+  <li>
+    <a href="{% url 'signup_view' %}">SignUp</a>
+  </li>
+  {% endif %}
 
-            <li>
-                <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
-            </li>
+  <li>
+    <a class="link-orange" href="{% url 'contact_us' %}">Contact-Us</a>
+  </li>
 
-            {% if request.user.is_authenticated %}
-            <li>
-                <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
-            </li>
-            {% endif %}
-        </ul>
-        <div class="res-icon">
-            <div class="item1"></div>
-            <div class="item2"></div>
-            <div class="item3"></div>
-        </div>
-    </nav>
-    <script src="{% static 'orders/nav.js' %}"></script>
-</main>
+  {% if request.user.is_authenticated %}
+    <li>
+      <a class="link-orange" href="{% url '_logout' %}">LogOut</a>
+    </li>
+  {% endif %}
+{% endblock %}
+
+{% block body %}
 
 <!-- Content -->
 {% if messages %}
@@ -71,7 +57,7 @@ Cart
     <form action="{% url 'submit_order' %}" class="card-body item-order-form" method="POST">
         {% csrf_token %}
         <div class="bold-30" id="item-order-title" style="margin-top: 5px;"> Choose Item to Order </div>
-        <div class="order-input-container" id="itemType-container"></div>
+        <div class="order-input-container order-type" id="itemType-container"></div>
         <div class="order-input-container">
             <select class="custom-select item-input" id="select-items" type="text" name="itemType">
                 <option value="default">Choose item...</option>
@@ -92,7 +78,7 @@ Cart
         <!-- Input type to get quantity -->
         <div class="center options qty-form" id="qty">
             <div class="bold-30">Quantity</div>
-            <input class="form-control field-8" type="number" min="1" max="1000" name="item_quantity" value="1">
+            <input class="form-control field-8 qty-control" type="number" min="1" max="1000" name="item_quantity" value="1">
         </div>
 
         <!-- Pizza Form -->
@@ -292,10 +278,10 @@ Cart
     <div class="card-footer footer-card-content bg-dark cart-footer">
 
         <div class="col center style-cost">
-            Total (includes +8% HST): <strong class="bold-30"> ${{ price }} </strong>
+            Total <small>(+8% HST)</small> <strong class="bold-30"> ${{ price }} </strong>
         </div>
         <div class="col center style-cost">
-            Total Items: <strong class="bold-30"> {{ count }} </strong>
+            Total Items <strong class="bold-30"> {{ count }} </strong>
         </div>
 
         <form action="{% url 'check_out' %}" method="POST" class="col float-right">

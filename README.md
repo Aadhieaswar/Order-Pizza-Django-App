@@ -47,6 +47,12 @@
 Here, it is shown how to place an order of any pizza or other items in the menu through the website.
   <hr>
 
+##### Responsive Design
+  ![responsive-design](./images/responsive-design.gif)
+  <br>
+Here, it is shown the responsive view of the website (in mobile).
+  <hr>
+
 ### Credits
 - Harvard CS50 for this idea of a wonderful project.
 - Implemented by __Aadhieaswar Senthil Kumar__
