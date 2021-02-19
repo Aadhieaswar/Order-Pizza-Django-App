@@ -161,6 +161,11 @@ footer {
   list-style-type: none;
 }
 
+/* style for cart-btn for placing order */
+.cart-btn {
+  display: flex;
+}
+
 .logo {
   float: left;
   max-width: 60px;
@@ -452,8 +457,7 @@ footer {
 
 .field-8 {
   width: 8%;
-  margin-left: 46%;
-  margin-right: 46%;
+  margin: 0 auto;
 }
 
 .receipt-head {
@@ -587,7 +591,7 @@ footer {
 }
 
 @media screen and (max-width: 840px) {
-  body {
+  body main {
     overflow-x: hidden;
   }
 
@@ -816,6 +820,23 @@ footer {
   .table-cus {
     width: 80%;
     margin-left: 10%;
+  }
+
+  .res-logo > h4 {
+    font-size: 35px;
+  }
+
+  .cart-btn {
+    transition: 0.3s ease-in forwards;
+  }
+
+  .order-type {
+    width: 110%;
+    margin-left: -7%;
+  }
+
+  .qty-control {
+    width: 40%;
   }
 }
 

@@ -12,7 +12,7 @@ Pinocchio's Pizza
 <!-- NavBar -->
 {% block nav %}
   <li>
-    <div class="username">{{ request.user }}</div>
+    <div class="username">{{ request.user|truncatechars:6 }}</div>
   </li>
   <li>
     <a class="link-orange" href="{% url 'home' %}">Home</a>

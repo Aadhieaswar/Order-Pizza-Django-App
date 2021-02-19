@@ -1,7 +1,7 @@
 const navSlide = () => {
     const resIcon = document.querySelector('.res-icon')
     const resOpt = document.querySelector('.res-links')
-    const resLinks = document.querySelectorAll('.res-links li')
+  const resLinks = document.querySelectorAll('.res-links > li')
 
     resIcon.addEventListener('click', () => {
 

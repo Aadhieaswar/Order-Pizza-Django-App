@@ -13,7 +13,7 @@ Contact
 {% block nav %}
   {% if request.user.is_authenticated %}
   <li>
-    <div class="username">{{ request.user }}</div>
+    <div class="username">{{ request.user|truncatechars:6 }}</div>
   </li>
   {% endif %}
 
