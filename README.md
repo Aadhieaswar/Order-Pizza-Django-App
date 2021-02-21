@@ -50,7 +50,7 @@ Here, it is shown how to place an order of any pizza or other items in the menu 
 ##### Responsive Design
   ![responsive-design](./images/responsive-design.gif)
   <br>
-Here, it is shown the responsive view of the website (in mobile).
+Here, it shows the responsive view of the website (in mobile).
   <hr>
 
 ### Credits
