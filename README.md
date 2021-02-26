@@ -1,4 +1,4 @@
-# Pizza Website
+# Order Pizza - Django Web App
 
 ### Requirements
 - `Python3.6 frameworks/packages` :
